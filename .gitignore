@@ -10,7 +10,6 @@ data/
 .project
 .settings
 .springBeans
-*.sh
 *.xjb
 *.out
 tmp/

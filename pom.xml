@@ -7,8 +7,7 @@
 	<artifactId>java-xslt</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-
-	<name>java-xslt</name>
+	<name>xsl-tool</name>
 	<description>Some coding problems</description>
 
 	<parent>

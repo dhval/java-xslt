@@ -16,7 +16,7 @@ public class XMLWriter {
     public void buildSchemas(String path) throws IOException {
         LOG.info("Path: " + path);
         String[] files = FileUtils.allFilesByType(path, "xsd");
-        LOG.info("Found #" + files.length);
+        LOG.info("Found #" + files.length + " files.");
         for(String file: files) {
             LOG.info(file);
         }
