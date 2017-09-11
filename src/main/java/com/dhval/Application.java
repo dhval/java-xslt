@@ -1,0 +1,53 @@
+package com.dhval;
+
+import com.dhval.utils.XMLWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Arrays;
+import java.util.List;
+
+@SpringBootApplication
+public class Application implements ApplicationRunner {
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        LOG.info("Hello ..." + args.getNonOptionArgs() + Arrays.toString(args.getSourceArgs()));
+        LOG.info("OptionNames ..." + Arrays.toString(args.getOptionNames().toArray()));
+
+        for(String opt: args.getOptionNames()) {
+            LOG.info("Option - " + opt);
+            final List<String> optList = args.getOptionValues(opt);
+            if (optList != null)
+                for(String val: optList) {
+                    LOG.info("\t " + val);
+                }
+        }
+        final List<String> destList = args.getOptionValues("dest");
+
+        if (args.getNonOptionArgs().size() >0 && args.getNonOptionArgs().get(0).contains("schema")) {
+            String src = args.getOptionValues("src").get(0);
+            new XMLWriter().buildSchemas(src.replaceAll("\\\\\\ ", " "));
+        }
+
+        /**
+        String dirName = srcList.get(0);
+        LOG.info("Directory: " + dirName);
+
+        String[] files = FileUtils.allFilesbyType(dirName, "xsd");
+        for(String file: files) {
+            LOG.info(file);
+        }
+         **/
+
+    }
+}
