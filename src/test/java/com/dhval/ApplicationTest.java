@@ -34,7 +34,7 @@ public class ApplicationTest {
     @Test
     public void run3() throws Exception {
         XPathList xPathList = new XPathList();
-        for(String value: xPathList.list("/Users/user/projects/java-xslt/schemas.xml", "//schemas", "file")) {
+        for(String value: xPathList.list("schemas.xml", "//schemas", "file")) {
             LOG.info(value);
         }
     }

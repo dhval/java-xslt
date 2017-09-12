@@ -1,5 +1,6 @@
 package com.dhval;
 
+import com.dhval.utils.TransformUtils;
 import com.dhval.utils.XMLWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +35,16 @@ public class Application implements ApplicationRunner {
         }
         final List<String> destList = args.getOptionValues("dest");
 
-        if (args.getNonOptionArgs().size() >0 && args.getNonOptionArgs().get(0).contains("schema")) {
-            String src = args.getOptionValues("src").get(0);
-            new XMLWriter().buildSchemas(src.replaceAll("\\\\\\ ", " "));
+        if (args.getNonOptionArgs().size() == 0) {
+            LOG.info("No options specified. !");
+        } else if (args.getNonOptionArgs().get(0).contains("schema")) {
+            String src = parseOption(args, "src");
+            new XMLWriter().buildSchemas(src);
+        } else if (args.getNonOptionArgs().get(0).contains("transform")) {
+            String src = parseOption(args, "src");
+            String dest = parseOption(args, "dest");
+            String xslFile = parseOption(args, "xsl");
+            new TransformUtils().transform(xslFile, src, dest);
         }
 
         /**
@@ -49,5 +57,11 @@ public class Application implements ApplicationRunner {
         }
          **/
 
+    }
+
+    private String parseOption(ApplicationArguments args, String opt) {
+        String val = args.getOptionValues(opt).get(0);
+        // Remove any escaped spaces, no need to escape.
+        return val.replaceAll("\\\\\\ ", " ");
     }
 }
