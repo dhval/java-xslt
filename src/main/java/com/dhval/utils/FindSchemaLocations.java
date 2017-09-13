@@ -14,26 +14,31 @@ public class FindSchemaLocations {
     public static final QName XS_SCHEMA = new QName("xs", "http://www.w3.org/2001/XMLSchema", "schema");
     public static final QName XS_IMPORT = new QName("xs", "http://www.w3.org/2001/XMLSchema", "import");
 
+    private Processor processor = new Processor(false);
+
     public List<String> buildFromWsdl(final String wsdlFile) throws Exception {
         Path path = Paths.get(wsdlFile).getParent();
         LOG.info("Wsdl Path: " + path.toString());
-
-        Map<String, String> values = new HashMap<>();
         List<String> files = new ArrayList<>();
-        Processor proc = new Processor(false);
-        XPathCompiler xpath = proc.newXPathCompiler();
-        xpath.declareNamespace("wsdl", "http://schemas.xmlsoap.org/wsdl/");
-
-        DocumentBuilder builder = proc.newDocumentBuilder();
+        DocumentBuilder builder = processor.newDocumentBuilder();
         builder.setLineNumbering(true);
         builder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
-        XdmNode booksDoc = builder.build(new File(wsdlFile));
+        XdmNode xdmNode = builder.build(new File(wsdlFile));
+        List<String> xsdFiles = fileRefsInWSDL(xdmNode);
+        LOG.warn("Direct schema references in WSDL, found #" + xsdFiles.size());
+        for(String file : xsdFiles) {
+            files.add(path.resolve(file).normalize().toString());
+        }
+        return files;
+    }
 
-        // find all the nodeName elements, within selector
-
+    private List<String> fileRefsInWSDL(XdmNode xdmNode) throws SaxonApiException {
+        List<String> files = new ArrayList<>();
+        XPathCompiler xpath = processor.newXPathCompiler();
+        xpath.declareNamespace("wsdl", "http://schemas.xmlsoap.org/wsdl/");
+        xpath.declareNamespace("xs", "http://www.w3.org/2001/XMLSchema");
         XPathSelector selector = xpath.compile("//wsdl:types").load();
-        selector.setContextItem(booksDoc);
-
+        selector.setContextItem(xdmNode);
         for (XdmItem item : selector) {
             XdmSequenceIterator itr = ((XdmNode) item).axisIterator(Axis.CHILD, XS_SCHEMA);
             while (itr.hasNext()) {
@@ -41,63 +46,89 @@ public class FindSchemaLocations {
                 XdmSequenceIterator itr2 = schemaEl.axisIterator(Axis.CHILD, XS_IMPORT);
                 while (itr2.hasNext()) {
                     XdmNode importEl = (XdmNode) itr2.next();
-                    String namespace = importEl.getAttributeValue(new QName("namespace"));
+                    // String namespace = importEl.getAttributeValue(new QName("namespace"));
                     String schemaLocation = importEl.getAttributeValue(new QName("schemaLocation"));
                     // resolve to base directory
-                    values.put(namespace, path.resolve(schemaLocation).normalize().toString());
+                    files.add(schemaLocation);
                 }
             }
         }
-
-
-        LOG.warn("Found #" + values.size());
-        Iterator<Map.Entry<String, String>> mapItr = values.entrySet().iterator();
-        while (mapItr.hasNext()) {
-            Map.Entry<String, String> entry = mapItr.next();
-            LOG.info(entry.getKey() + " : " + entry.getValue());
-            files.add(entry.getValue());
-        }
-
         return files;
     }
 
+    /**
+     * Find all the files referenced by input files, similar to breadth first graph search.
+     * @param xsdFiles
+     * @return
+     * @throws Exception
+     */
     public List<String> buildFromXsd(final List<String> xsdFiles) throws Exception {
         List<String> files = new ArrayList<>();
-
-        Processor proc = new Processor(false);
-        XPathCompiler xpath = proc.newXPathCompiler();
-        xpath.declareNamespace("xs", "http://www.w3.org/2001/XMLSchema");
-
-        DocumentBuilder builder = proc.newDocumentBuilder();
+        DocumentBuilder builder = processor.newDocumentBuilder();
         builder.setLineNumbering(true);
         builder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
 
-        for (String file : xsdFiles) {
+        while (xsdFiles.size() > 0) {
+            String file = xsdFiles.get(0);
             Path path = Paths.get(file).getParent();
+            // resolve to base directory
+            String curFilePath = path.resolve(file).normalize().toString();
+            if (files.contains(curFilePath)) {
+                xsdFiles.remove(curFilePath);
+                continue;
+            }
             LOG.info("XSD File: " + file);
-            XdmNode booksDoc = builder.build(new File(file));
-            XPathSelector selector = xpath.compile("//xs:schema").load();
-            selector.setContextItem(booksDoc);
-
-            for (XdmItem item : selector) {
-                XdmSequenceIterator itr = ((XdmNode) item).axisIterator(Axis.CHILD, XS_IMPORT);
-                while (itr.hasNext()) {
-                    XdmNode importEl = (XdmNode) itr.next();
-                    String schemaLocation = importEl.getAttributeValue(new QName("schemaLocation"));
-                    String filePath = path.resolve(schemaLocation).normalize().toString();
-                    // resolve to base directory
-                    if (!xsdFiles.contains(filePath)) files.add(filePath);
+            // mark file as visited
+            files.add(curFilePath);
+            xsdFiles.remove(curFilePath);
+            // find all files referenced by this file
+            XdmNode xdmNode = builder.build(new File(file));
+            List<String> fileRefs = fileRefsInXSD(xdmNode);
+            for(String f : fileRefs) {
+                String filePath = path.resolve(f).normalize().toString();
+                if (files.contains(filePath)) {
+                    xsdFiles.remove(filePath);
+                    continue;
+                } else if (!xsdFiles.contains(filePath)) {
+                    // visit this later
+                    xsdFiles.add(filePath);
                 }
             }
         }
 
         // recursively traverse new found xsd files.
+/*
         if (files.size() > 0) {
             LOG.info("Found #" + files.size());
             files.addAll(buildFromXsd(files));
         }
+*/
 
         files.addAll(xsdFiles);
+        return files;
+    }
+
+    /**
+     * Find all files referenced using selector  //xs:schema/xs:import[@schemaLocation]
+     * //TODO xpath gets compiled a lot.
+     * @param xdmNode
+     * @return
+     * @throws SaxonApiException
+     */
+    private List<String> fileRefsInXSD(XdmNode xdmNode) throws SaxonApiException {
+        List<String> files = new ArrayList<>();
+        XPathCompiler xpath = processor.newXPathCompiler();
+        xpath.declareNamespace("xs", "http://www.w3.org/2001/XMLSchema");
+        XPathSelector selector = xpath.compile("//xs:schema").load();
+        selector.setContextItem(xdmNode);
+        for (XdmItem item : selector) {
+            XdmSequenceIterator itr = ((XdmNode) item).axisIterator(Axis.CHILD, XS_IMPORT);
+            while (itr.hasNext()) {
+                XdmNode importEl = (XdmNode) itr.next();
+                String schemaLocation = importEl.getAttributeValue(new QName("schemaLocation"));
+                files.add(schemaLocation);
+             }
+        }
         return files;
     }
 }
