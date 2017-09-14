@@ -1,5 +1,6 @@
 package com.dhval.utils;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,6 +117,10 @@ public class FileUtils {
             name = file.getAbsolutePath();
         }
         return name;
+    }
+
+    public static String addFileExtension(String outFile, String ext) {
+        return FilenameUtils.getFullPath(outFile) + FilenameUtils.getBaseName(outFile) + ext + "." + FilenameUtils.getExtension(outFile);
     }
 
     public static void main(String[] args) throws IOException {

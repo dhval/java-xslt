@@ -9,11 +9,8 @@ gen_schemas_xml() {
 }
 
 gen_flatten_wsdl() {
-	WSDL_PATH="/Users/dhval/projects/jnet/dp/PDTD_SSP_v1.0.7/schema/SIP WS 1.1/PennDOTDriver.wsdl"
-	xalan -o PennDOTDriver-Full.wsdl $WSDL_PATH flatten-wsdl.xsl 
-	xalan -o PennDOTDriver-UI.wsdl PennDOTDriver-Full.wsdl RemoveSubstitutionGroups.xslt
-	xalan -o PennDOTDriver-UI.wsdl PennDOTDriver-Full.wsdl RemoveDummyAttributes.xslt
-	xalan -o PennDOTDriver-WM-Client.wsdl PennDOTDriver-Full.wsdl make-wm-client-wsdl.xslt
-	xalan -o PennDOTDriver-WM.wsdl PennDOTDriver-Full.wsdl make-wm-wsdl.xslt  
+ 	echo "WSDL File: "$@
+ 	echo "Generating file: _Full.wsdl"
+ 	mvn clean spring-boot:run -Drun.arguments="flatten,--src=$@" -f="$MVN_DIR"
 }
 

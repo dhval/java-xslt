@@ -1,7 +1,9 @@
 package com.dhval;
 
+import com.dhval.sample.task.FlattenWSDL;
 import com.dhval.utils.*;
 import net.sf.saxon.s9api.*;
+import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -21,11 +23,18 @@ public class TransformTest {
     private static final Logger LOG = LoggerFactory.getLogger(TransformTest.class);
     public static final QName XS_SCHEMA = new QName("xs", "http://www.w3.org/2001/XMLSchema", "schema");
     public static final QName XS_IMPORT = new QName("xs", "http://www.w3.org/2001/XMLSchema", "import");
+    private static final String XSL_FLATTEN = "src/main/resources/xsl/flatten-wsdl.xsl";
+    private static final String XSL_SORT_NS = "src/main/resources/xsl/sort-schema.xsl";
+    private static final String WSDL_FILE = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/SIP WS 1.1/PAMMI.wsdl";
+    private static final String ROOT_XSL_FILE = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/schema/PAMMI.xsd";
+    private static final String ROOT_SCHEMA_DIR = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/schema";
 
     @Test
     public void run3() throws Exception {
-        String wsdlFile = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/SIP WS 1.1/PAMMI.wsdl";
-        String xsdFile = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/schema/PAMMI.xsd";
+        FlattenWSDL.flatten(WSDL_FILE);
+    }
+
+    private void generateSchemas(String wsdlFile) throws IOException, SaxonApiException {
         List<String> list = new FindSchemaLocations().buildFromWsdl(wsdlFile);
         List<String> xsdFiles = new FindSchemaLocations().buildFromXsd(list);
         int count = 0;
@@ -33,24 +42,16 @@ public class TransformTest {
             // recursively traverse new found xsd files.
             LOG.info((++count) + "# " + file);
         }
-    }
-
-    //@Test
-    public void transform() throws Exception {
-        String xmlFile = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/SIP WS 1.1/PAMMI.wsdl";
-        String outFile = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/SIP WS 1.1/PAMMI-Full.wsdl";
-        String xslFile = "src/main/resources/xsl/flatten-wsdl.xsl";
-        generateSchemas();
-        new TransformUtils().transform(xslFile, xmlFile, outFile);
+        new XMLWriter().buildSchemas(xsdFiles.toArray(new String[xsdFiles.size()]));
     }
 
     private void generateSchemas() throws IOException {
-        String path = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/schema";
-        String[] files = FileUtils.allFilesByType(path, "xsd");
+        String[] files = FileUtils.allFilesByType(ROOT_SCHEMA_DIR, "xsd");
         for (String file : files) {
             LOG.info(file);
         }
         LOG.info("Found #" + files.length);
         new XMLWriter().buildSchemas(files);
     }
+
 }

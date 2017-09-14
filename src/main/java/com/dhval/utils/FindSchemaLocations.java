@@ -16,7 +16,7 @@ public class FindSchemaLocations {
 
     private Processor processor = new Processor(false);
 
-    public List<String> buildFromWsdl(final String wsdlFile) throws Exception {
+    public List<String> buildFromWsdl(final String wsdlFile) throws SaxonApiException {
         Path path = Paths.get(wsdlFile).getParent();
         LOG.info("Wsdl Path: " + path.toString());
         List<String> files = new ArrayList<>();
@@ -62,11 +62,12 @@ public class FindSchemaLocations {
      * @return
      * @throws Exception
      */
-    public List<String> buildFromXsd(final List<String> xsdFiles) throws Exception {
+    public List<String> buildFromXsd(final List<String> xsdFiles) throws SaxonApiException {
         List<String> files = new ArrayList<>();
         DocumentBuilder builder = processor.newDocumentBuilder();
         builder.setLineNumbering(true);
         builder.setWhitespaceStrippingPolicy(WhitespaceStrippingPolicy.ALL);
+        int fileCounter = 0;
 
         while (xsdFiles.size() > 0) {
             String file = xsdFiles.get(0);
@@ -77,7 +78,7 @@ public class FindSchemaLocations {
                 xsdFiles.remove(curFilePath);
                 continue;
             }
-            LOG.info("XSD File: " + file);
+            LOG.info("XSD File" + (++fileCounter) + "#: " + file);
             // mark file as visited
             files.add(curFilePath);
             xsdFiles.remove(curFilePath);
@@ -95,15 +96,6 @@ public class FindSchemaLocations {
                 }
             }
         }
-
-        // recursively traverse new found xsd files.
-/*
-        if (files.size() > 0) {
-            LOG.info("Found #" + files.size());
-            files.addAll(buildFromXsd(files));
-        }
-*/
-
         files.addAll(xsdFiles);
         return files;
     }

@@ -1,5 +1,6 @@
 package com.dhval;
 
+import com.dhval.sample.task.FlattenWSDL;
 import com.dhval.utils.TransformUtils;
 import com.dhval.utils.XMLWriter;
 import org.slf4j.Logger;
@@ -38,25 +39,10 @@ public class Application implements ApplicationRunner {
         if (args.getNonOptionArgs().size() == 0) {
             LOG.info("No options specified. !");
         } else if (args.getNonOptionArgs().get(0).contains("schema")) {
-            String src = parseOption(args, "src");
-            new XMLWriter().buildSchemas(src);
-        } else if (args.getNonOptionArgs().get(0).contains("transform")) {
-            String src = parseOption(args, "src");
-            String dest = parseOption(args, "dest");
-            String xslFile = parseOption(args, "xsl");
-            new TransformUtils().transform(xslFile, src, dest);
+            new XMLWriter().buildSchemas(parseOption(args, "src"));
+        } else if (args.getNonOptionArgs().get(0).contains("flatten")) {
+            FlattenWSDL.flatten(parseOption(args, "src"));
         }
-
-        /**
-        String dirName = srcList.get(0);
-        LOG.info("Directory: " + dirName);
-
-        String[] files = FileUtils.allFilesbyType(dirName, "xsd");
-        for(String file: files) {
-            LOG.info(file);
-        }
-         **/
-
     }
 
     private String parseOption(ApplicationArguments args, String opt) {
