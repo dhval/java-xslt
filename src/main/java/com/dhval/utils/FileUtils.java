@@ -3,8 +3,11 @@ package com.dhval.utils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -141,5 +144,11 @@ public class FileUtils {
         }  finally {
             br.close();
         }
+    }
+
+    public static File findFile(String src) throws URISyntaxException, IOException {
+        URL url = FileUtils.class.getResource(src);
+        LOG.info("");
+        return new ClassPathResource(src).getFile();
     }
 }

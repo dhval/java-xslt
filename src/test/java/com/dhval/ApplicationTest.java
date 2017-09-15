@@ -20,16 +20,6 @@ import java.io.StringWriter;
 @SpringBootTest(classes = {Application.class})
 public class ApplicationTest {
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
-    @Test
-    public void listFiles() throws Exception {
-        String path = "/Users/user/OneDrive - Commonwealth of Pennsylvania/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/artifacts/service model/information model/PennDOTDriver_IEPD/schema";
-        String[] files = FileUtils.allFilesByType(path, "xsd");
-        for(String file: files) {
-            LOG.info(file);
-        }
-        LOG.info("Found #" + files.length);
-        new XMLWriter().buildSchemas(files);
-    }
 
     @Test
     public void run3() throws Exception {

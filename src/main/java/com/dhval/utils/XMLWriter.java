@@ -1,6 +1,8 @@
 package com.dhval.utils;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -20,10 +22,10 @@ public class XMLWriter {
         for(String file: files) {
             LOG.info(file);
         }
-        buildSchemas(FileUtils.allFilesByType(path, "xsd"));
+        buildSchemas(Paths.get(path), FileUtils.allFilesByType(path, "xsd"));
     }
 
-    public void buildSchemas(String[] files) {
+    public void buildSchemas(Path path, String[] files) {
         Node item;
         Document xmlDoc = new DocumentImpl();
         Element root = xmlDoc.createElement("schemas");

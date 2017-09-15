@@ -34,24 +34,5 @@ public class TransformTest {
         FlattenWSDL.flatten(WSDL_FILE);
     }
 
-    private void generateSchemas(String wsdlFile) throws IOException, SaxonApiException {
-        List<String> list = new FindSchemaLocations().buildFromWsdl(wsdlFile);
-        List<String> xsdFiles = new FindSchemaLocations().buildFromXsd(list);
-        int count = 0;
-        for (String file : xsdFiles) {
-            // recursively traverse new found xsd files.
-            LOG.info((++count) + "# " + file);
-        }
-        new XMLWriter().buildSchemas(xsdFiles.toArray(new String[xsdFiles.size()]));
-    }
-
-    private void generateSchemas() throws IOException {
-        String[] files = FileUtils.allFilesByType(ROOT_SCHEMA_DIR, "xsd");
-        for (String file : files) {
-            LOG.info(file);
-        }
-        LOG.info("Found #" + files.length);
-        new XMLWriter().buildSchemas(files);
-    }
 
 }
