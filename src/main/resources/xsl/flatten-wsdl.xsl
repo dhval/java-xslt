@@ -5,7 +5,7 @@
 	<xsl:output method="xml" indent="yes"/>
 	<xsl:strip-space elements="*"/>
 	
-	<xsl:variable name="schemas" select="document('schemas.xml')/schemas"/>
+	<xsl:variable name="schemas" select="document('../schemas.xml')/schemas"/>
 	
 	<xsl:template match="node() | @*">
 		<xsl:copy>
