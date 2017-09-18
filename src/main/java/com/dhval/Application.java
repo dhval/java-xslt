@@ -1,7 +1,7 @@
 package com.dhval;
 
-import com.dhval.sample.task.FlattenWSDL;
-import com.dhval.utils.TransformUtils;
+import com.dhval.task.FlattenWSDL;
+import com.dhval.utils.FileUtils;
 import com.dhval.utils.XMLWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +10,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +41,9 @@ public class Application implements ApplicationRunner {
         if (args.getNonOptionArgs().size() == 0) {
             LOG.info("No options specified. !");
         } else if (args.getNonOptionArgs().get(0).contains("schema")) {
-            new XMLWriter().buildSchemas(parseOption(args, "src"));
+            String path = parseOption(args, "src");
+            File schemas = Paths.get(path).resolve("schemas.xml").toFile();
+            new XMLWriter().buildSchemas(schemas, FileUtils.allFilesByType(path, "xsd"));
         } else if (args.getNonOptionArgs().get(0).contains("flatten")) {
             FlattenWSDL.flatten(parseOption(args, "src"));
         }

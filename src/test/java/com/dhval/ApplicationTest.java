@@ -1,5 +1,6 @@
 package com.dhval;
 
+import com.dhval.sample.DPInteropClient;
 import com.dhval.utils.FileUtils;
 import com.dhval.utils.XMLWriter;
 import com.dhval.utils.XPathList;
@@ -15,18 +16,21 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
 public class ApplicationTest {
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
 
+
     @Test
     public void run3() throws Exception {
-        XPathList xPathList = new XPathList();
-        for(String value: xPathList.list("schemas.xml", "//schemas", "file")) {
-            LOG.info(value);
-        }
+        String xsltFile = "/Users/dhval/drive/play/xslt/identity.xsl";
+        String xmlFile = "/Users/dhval/drive/play/xslt/morpho-request.xml";
+        String[] args = new String[] {"-x", xsltFile, "-i", xmlFile, "-h", "dpbox.foo.com", "-p", "9991"};
+        DPInteropClient.main(args);
     }
 
     public void run() throws SaxonApiException {

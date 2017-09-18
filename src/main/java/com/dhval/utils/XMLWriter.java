@@ -15,17 +15,8 @@ import org.w3c.dom.*;
 public class XMLWriter {
     private static final Logger LOG = LoggerFactory.getLogger(XMLWriter.class);
 
-    public void buildSchemas(String path) throws IOException {
-        LOG.info("Path: " + path);
-        String[] files = FileUtils.allFilesByType(path, "xsd");
-        LOG.info("Found #" + files.length + " files.");
-        for(String file: files) {
-            LOG.info(file);
-        }
-        buildSchemas(Paths.get(path), FileUtils.allFilesByType(path, "xsd"));
-    }
-
-    public void buildSchemas(Path path, String[] files) {
+    public void buildSchemas(File xmlFile, String[] files) {
+        LOG.info("xmlFile: " + xmlFile.toString());
         Node item;
         Document xmlDoc = new DocumentImpl();
         Element root = xmlDoc.createElement("schemas");
@@ -38,7 +29,6 @@ public class XMLWriter {
 
         try {
             Source source = new DOMSource(xmlDoc);
-            File xmlFile = new File("schemas.xml");
             StreamResult result = new StreamResult(new OutputStreamWriter(
                     new FileOutputStream(xmlFile), "UTF-8"));
             Transformer xformer = TransformerFactory.newInstance().newTransformer();

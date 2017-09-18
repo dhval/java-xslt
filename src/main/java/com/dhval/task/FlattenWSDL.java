@@ -1,15 +1,15 @@
-package com.dhval.sample.task;
+package com.dhval.task;
 
 import com.dhval.utils.FileUtils;
 import com.dhval.utils.FindSchemaLocations;
 import com.dhval.utils.TransformUtils;
 import com.dhval.utils.XMLWriter;
 import net.sf.saxon.s9api.SaxonApiException;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -26,10 +26,10 @@ public class FlattenWSDL {
         List<String> list = new FindSchemaLocations().buildFromWsdl(wsdlFile);
         List<String> xsdFiles = new FindSchemaLocations().buildFromXsd(list);
         LOG.info(("Found (xsd)# " + xsdFiles.size()));
-        String basePath = FilenameUtils.getBaseName(new ClassPathResource(XSL_SORT_NS).getFilename());
+        Path basePath = Paths.get(new ClassPathResource(XSL_SORT_NS).getFile().getAbsolutePath()).getParent();
+        File schemas = basePath.resolveSibling("schemas.xml").toFile();
 
-
-        new XMLWriter().buildSchemas(Paths.get(new ClassPathResource(XSL_SORT_NS).getFilename()), xsdFiles.toArray(new String[xsdFiles.size()]));
+        new XMLWriter().buildSchemas(schemas, xsdFiles.toArray(new String[xsdFiles.size()]));
         new TransformUtils().transform(XSL_FLATTEN, wsdlFile, outFile);
         new TransformUtils().transform(XSL_SORT_NS, outFile, outFile);
     }
