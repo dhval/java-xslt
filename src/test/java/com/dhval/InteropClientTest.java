@@ -1,9 +1,6 @@
 package com.dhval;
 
 import com.dhval.sample.DPInteropClient;
-import com.dhval.utils.FileUtils;
-import com.dhval.utils.XMLWriter;
-import com.dhval.utils.XPathList;
 import net.sf.saxon.s9api.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,27 +10,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
-public class ApplicationTest {
-    private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
-
+public class InteropClientTest {
+    private static final Logger LOG = LoggerFactory.getLogger(InteropClientTest.class);
 
     @Test
-    public void run3() throws Exception {
+    public void run () throws Exception {
         String xsltFile = "/Users/dhval/drive/play/xslt/identity.xsl";
         String xmlFile = "/Users/dhval/drive/play/xslt/morpho-request.xml";
-        String[] args = new String[] {"-x", xsltFile, "-i", xmlFile, "-h", "dpbox.foo.com", "-p", "9991"};
+        String[] args = new String[] {"-x", xsltFile, "-i", xmlFile, "-h", "10.182.71.60", "-p", "9990"};
         DPInteropClient.main(args);
     }
 
-    public void run() throws SaxonApiException {
+    public void run1() throws SaxonApiException {
         Processor proc = new Processor(false);
         DocumentBuilder builder = proc.newDocumentBuilder();
         StringReader reader = new StringReader("<a xmlns='http://a.com/' b='c'><z xmlns=''/></a>");

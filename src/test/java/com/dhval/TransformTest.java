@@ -15,7 +15,7 @@ public class TransformTest {
     private static final String WSDL_FILE = "/Users/dhval/drive/OA5TPPJNET084/MMI/PAMMI_SSP_v1.0.0/SIP WS 1.1/PAMMI.wsdl";
 
     @Test
-    public void run3() throws Exception {
+    public void run() throws Exception {
         FlattenWSDL.flatten(WSDL_FILE);
     }
 
