@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SOAP-ENV:Header>
+<wsse:Security SOAP-ENV:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+<wsu:Timestamp wsu:Id="Timestamp-d9beaa8c-92ce-4d4c-8974-6eafc6607f11" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+<wsu:Created>2017-11-08T14:55:24Z</wsu:Created>
+<wsu:Expires>2017-11-08T15:00:24Z</wsu:Expires></wsu:Timestamp>
+<wsse:BinarySecurityToken wsu:Id="SecurityToken-96caab01-4360-4120-b5d4-6eafc660cfe8" EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">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</wsse:BinarySecurityToken>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+
+<SignedInfo>
+  
+<CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+  
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+  
+<Reference URI="#SecurityToken-96caab01-4360-4120-b5d4-6eafc660cfe8">
+    
+<Transforms>
+      
+<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    </Transforms>
+    
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    
+<DigestValue>25lxLcFQ25aC+Wa6GpWjszuFt8k=</DigestValue>
+  </Reference>
+  
+<Reference URI="#Timestamp-d9beaa8c-92ce-4d4c-8974-6eafc6607f11">
+    
+<Transforms>
+      
+<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    </Transforms>
+    
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    
+<DigestValue>7ZPmTOhljfwk4k3GUy3kZFKR0mo=</DigestValue>
+  </Reference>
+  
+<Reference URI="#Body-5a90205d-4355-4933-bcb0-6eafc660dcad">
+    
+<Transforms>
+      
+<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    </Transforms>
+    
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    
+<DigestValue>2vf8gdtoX7FTX+i6iCs+axtg3OE=</DigestValue>
+  </Reference>
+</SignedInfo>
+    
+<SignatureValue>dkAjewTfFu9gEri79+XwX5I0N1vwmpWRZfTF/6NocbiC8vZI+yWQAMQoCK4YLs8HH9x3Vc053wm2P6yymYx2mHUWwgnCJOXi2Fzkjtd3eQftPJAKafO61Xr84FEjGPUht7MMt9+RODlRMQcN/0M1D4Ny43GB9c7GgOTsuLGdW2BI1KXSqVGNh+xHWQVuGYti4KmvaKbCXDzFxgLaGjWGIsN3tNdVTu6iw9Qt44qoVS8Y7uHOrjzOTVanvfWa/eBvH6zx5XJ/qnJRIQlVqswbE1WikcoQu6mUo48mtESSVMrpqTHT0uAYmGgbmco19YseX2bpeYVT5NyKC4ieTDkXdQ==</SignatureValue>
+<KeyInfo>
+<wsse:SecurityTokenReference xmlns="">
+<wsse:Reference URI="#SecurityToken-96caab01-4360-4120-b5d4-6eafc660cfe8" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/></wsse:SecurityTokenReference></KeyInfo></Signature></wsse:Security></SOAP-ENV:Header>
+<SOAP-ENV:Body wsu:Id="Body-5a90205d-4355-4933-bcb0-6eafc660dcad" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+<m:Notify xmlns:m="http://jnet.state.pa.us/message/jnet/EventMessageConsumer/1">
+<jnet:EventMessage xmlns:nc="http://niem.gov/niem/niem-core/2.0" xmlns:jnet="http://www.jnet.state.pa.us/niem/JNET/jnet-core/1">
+<nc:DocumentCategoryText>EventMessage</nc:DocumentCategoryText>
+<nc:DocumentIdentification>
+<nc:IdentificationID>3504-4101-8b5b-1e32-15fb-6665b73</nc:IdentificationID></nc:DocumentIdentification>
+<nc:DocumentPostDate>
+<nc:DateTime>2017-11-08T14:55:24.537Z</nc:DateTime></nc:DocumentPostDate>
+<nc:DocumentSource>
+<nc:EntityOrganization>
+<nc:OrganizationName>AOPC</nc:OrganizationName></nc:EntityOrganization></nc:DocumentSource>
+<nc:DocumentSubjectText>CourtCaseEvent</nc:DocumentSubjectText>
+<jnet:HeaderField>
+<jnet:HeaderName>To</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://www.w3.org/2005/08/addressing</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>jms:topic://jnet.aopc.CourtNotice</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>MessageID</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://www.w3.org/2005/08/addressing</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>d61d5952bb4311e7b6578eb11f677141</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>Action</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://www.w3.org/2005/08/addressing</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>http://jnet.state.pa.us/jxdm/aopc/CourtCaseEvent/CaseInitiationPublish</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>CaseTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>COURT</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>CourtTypeCode</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>DIS</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>CountyCode</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>01</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>JurisdictionCode</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>51</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>DocketTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>CRIMINAL</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>DocketNumberText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>MJ-51301-CR-0000195-2017</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>ServiceTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>MESSAGE-XML</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>ActionTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>CRIMINAL COMPLAINT FILED</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>MessageTimestampDateTime</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>2017-10-27T14:22:49.114-04:00</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:Message>
+<aopc:CourtCaseEvent xsi:schemaLocation="http://jnet.state.pa.us/jxdm/aopc CourtCaseEvent.xsd" j:sourceIDText="DIS717503162" xmlns:ansi="http://www.it.ojp.gov/jxdm/ansi_d20/1.0" xmlns:nibrs="http://www.it.ojp.gov/jxdm/nibrs_misc/1.0" xmlns:ncic="http://www.it.ojp.gov/jxdm/ncic_2000/1.0" xmlns:usps="http://www.it.ojp.gov/jxdm/usps_states/1.0" xmlns:j="http://www.it.ojp.gov/jxdm/3.0" xmlns:ref="http://jnet.state.pa.us/jxdm/aopc/wsa-ref" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:aopc="http://jnet.state.pa.us/jxdm/aopc">
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>PROCESS NAME</j:MetadataFieldName>
+<j:MetadataFieldValueText>DISCaseInitiationPublish</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>EVENT ID</j:MetadataFieldName>
+<j:MetadataFieldValueText>5ec384246c6a474c9f49d2fda269cc3b</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>EVENT TYPE ID</j:MetadataFieldName>
+<j:MetadataFieldValueText>1051</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>SOURCE EVENT ID</j:MetadataFieldName>
+<j:MetadataFieldValueText/></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>EVENT TIMESTAMP</j:MetadataFieldName>
+<j:MetadataFieldValueText>2017-09-11 14:54:00.0</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:ActivityTypeText>CRIMINAL COMPLAINT FILED</j:ActivityTypeText>
+<j:ActivityDate>2017-06-12</j:ActivityDate>
+<j:ActivityTime>13:47:00-04:00</j:ActivityTime>
+<j:ActivityInitiatingInstrument>
+<j:DocumentDescriptiveMetadata>
+<j:DocumentFiledDate>2017-06-12</j:DocumentFiledDate></j:DocumentDescriptiveMetadata></j:ActivityInitiatingInstrument>
+<j:ActivityVictim>
+<j:Victim.Person j:sensitivityText="false" j:sourceIDText="DIS1020975">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="DIS1020985">
+<j:PersonGivenName>Holly</j:PersonGivenName>
+<j:PersonMiddleName>A</j:PersonMiddleName>
+<j:PersonSurName>Andrew</j:PersonSurName>
+<j:PersonFullName>Andrew, Holly A</j:PersonFullName></j:PersonName>
+<j:Residence>
+<j:LocationTypeText>Home</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS709535464">
+<j:LocationStreet>
+<j:StreetFullText>114 W High St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Residence>
+<j:PersonDescriptionText>Crime Victim</j:PersonDescriptionText>
+<j:PersonBirthDate>1962-04-10</j:PersonBirthDate>
+<j:PersonSocialDetails>
+<j:PersonEthnicityCode>U</j:PersonEthnicityCode></j:PersonSocialDetails></j:Victim.Person>
+<j:VictimOffenseChargeText>1</j:VictimOffenseChargeText>
+<j:VictimOffenseChargeText>2</j:VictimOffenseChargeText></j:ActivityVictim>
+<j:CaseTitleText>Comm. v. Bland, Deanna Michelle</j:CaseTitleText>
+<j:CaseDocketID>
+<j:ID>MJ-51301-CR-0000195-2017</j:ID></j:CaseDocketID>
+<j:CaseOtherID>
+<j:ID>17060020I</j:ID>
+<j:IDTypeDescriptionText>Originating Document Number</j:IDTypeDescriptionText></j:CaseOtherID>
+<j:CaseCourt>
+<j:OrganizationName>Magisterial District Court 51-3-01,  Gettysburg</j:OrganizationName>
+<j:OrganizationLocation>
+<j:LocationAddress>
+<j:LocationStreet>
+<j:StreetFullText>34 East Middle Street</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationCountyName>Adams</j:LocationCountyName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>01</j:AddressComponentText>
+<j:AddressComponentDescriptionText>COUNTY CODE</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:OrganizationLocation>
+<j:OrganizationJurisdiction>
+<j:JurisdictionText>51</j:JurisdictionText>
+<j:JurisdictionID>
+<j:ID>MDJ-51-3-01</j:ID></j:JurisdictionID></j:OrganizationJurisdiction>
+<j:CourtTypeCode>DIS</j:CourtTypeCode></j:CaseCourt>
+<j:CaseCourtEvent j:sourceIDText="DIS985654932">
+<j:ActivityTypeText>PRELIMINARY HEARING</j:ActivityTypeText>
+<j:ActivityStatus>
+<j:StatusText>SCHEDULED</j:StatusText></j:ActivityStatus>
+<j:CourtEventCourt>
+<j:OrganizationName>Magisterial District Court 51-3-01,  Gettysburg</j:OrganizationName>
+<j:OrganizationLocation>
+<j:LocationTypeText>Other</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS599255147">
+<j:LocationStreet>
+<j:StreetFullText>34 East Middle Street</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID/></j:LocationPostalCodeID></j:LocationAddress></j:OrganizationLocation></j:CourtEventCourt>
+<j:CourtEventJudge j:sourceIDText="13523">
+<j:PersonName j:sourceIDText="DIS706679911">
+<j:PersonPrefixName>The Honorable</j:PersonPrefixName>
+<j:PersonGivenName>Matthew</j:PersonGivenName>
+<j:PersonMiddleName>Robert</j:PersonMiddleName>
+<j:PersonSurName>Harvey</j:PersonSurName>
+<j:PersonFullName>Harvey, Matthew Robert</j:PersonFullName></j:PersonName></j:CourtEventJudge>
+<j:CourtEventSchedule>
+<j:ScheduleDate>2017-08-02</j:ScheduleDate>
+<j:ScheduleDayStartTime>10:15:00-04:00</j:ScheduleDayStartTime></j:CourtEventSchedule></j:CaseCourtEvent>
+<aopc:CaseDetails>
+<j:CaseDefendantSelfRepresentationIndicator>false</j:CaseDefendantSelfRepresentationIndicator>
+<j:CaseSubtypeText>Court Case</j:CaseSubtypeText></aopc:CaseDetails>
+<aopc:CaseParticipants>
+<j:CaseInitiatingParty.Person j:sensitivityText="false" j:sourceIDText="DIS213319">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="DIS213360">
+<j:PersonGivenName>Brian</j:PersonGivenName>
+<j:PersonMiddleName>J.</j:PersonMiddleName>
+<j:PersonSurName>Weikert</j:PersonSurName>
+<j:PersonFullName>Weikert, Brian J.</j:PersonFullName></j:PersonName>
+<j:Residence>
+<j:LocationTypeText>Work</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS10025">
+<j:LocationStreet>
+<j:StreetFullText>59 E High St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Residence>
+<j:Employment>
+<j:EmploymentAssignedUnit.Organization>
+<j:OrganizationORIID>
+<j:ID>PA0010100</j:ID></j:OrganizationORIID></j:EmploymentAssignedUnit.Organization></j:Employment>
+<j:PersonAssignedIDDetails>
+<j:PersonHumanResourcesID>
+<j:ID>32227</j:ID></j:PersonHumanResourcesID></j:PersonAssignedIDDetails></j:CaseInitiatingParty.Person>
+<j:CaseJudge j:sourceIDText="13523">
+<j:PersonName j:sourceIDText="DIS706679911">
+<j:PersonPrefixName>The Honorable</j:PersonPrefixName>
+<j:PersonGivenName>Matthew</j:PersonGivenName>
+<j:PersonMiddleName>Robert</j:PersonMiddleName>
+<j:PersonSurName>Harvey</j:PersonSurName>
+<j:PersonFullName>Harvey, Matthew Robert</j:PersonFullName></j:PersonName>
+<j:PersonDescriptionText>Judge</j:PersonDescriptionText></j:CaseJudge>
+<j:CaseOtherActor.Person j:sensitivityText="false" j:sourceIDText="DIS707458334">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="DIS709768224">
+<j:PersonGivenName>PENNY</j:PersonGivenName>
+<j:PersonSurName>MARSHALL</j:PersonSurName>
+<j:PersonFullName>MARSHALL, PENNY</j:PersonFullName></j:PersonName>
+<j:Residence>
+<j:LocationTypeText>Home</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS717242625">
+<j:LocationStreet>
+<j:StreetFullText>228 W. 2ND STREET</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>MT. CARMEL</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17851</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Residence>
+<j:PersonDescriptionText>Co-defendant</j:PersonDescriptionText>
+<j:PersonPhysicalDetails>
+<j:PersonSexCode>U</j:PersonSexCode>
+<j:PersonRaceCode>U</j:PersonRaceCode></j:PersonPhysicalDetails>
+<j:PersonSocialDetails>
+<j:PersonEthnicityCode>U</j:PersonEthnicityCode></j:PersonSocialDetails></j:CaseOtherActor.Person>
+<j:CaseProsecutionAttorney j:sensitivityText="false" j:sourceIDText="DIS4001">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="DIS4001">
+<j:PersonGivenName/>
+<j:PersonSurName>Adams County District Attorney's Office</j:PersonSurName>
+<j:PersonFullName>Adams County District Attorney's Office</j:PersonFullName></j:PersonName>
+<j:PrimaryContactInformation>
+<j:ContactTelephoneNumber>
+<j:TelephoneNumberFullID>7173379840</j:TelephoneNumberFullID>
+<j:TelephoneNumberCommentText>OFFICE</j:TelephoneNumberCommentText></j:ContactTelephoneNumber></j:PrimaryContactInformation>
+<j:PersonDescriptionText>Lead Attorney</j:PersonDescriptionText>
+<j:PersonWorkLocation.Location>
+<j:LocationTypeText>Case Work</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS4001">
+<j:LocationStreet>
+<j:StreetFullText>Adams County Courthouse</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>111-117 Baltimore Street</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:PersonWorkLocation.Location>
+<j:JudicialOfficialBarMembership>
+<j:JudicialOfficialBarID>
+<j:ID/></j:JudicialOfficialBarID>
+<j:JudicialOfficialBarStatus>
+<j:StatusText>Active</j:StatusText></j:JudicialOfficialBarStatus></j:JudicialOfficialBarMembership>
+<j:CaseOfficialRoleText>District Attorney</j:CaseOfficialRoleText></j:CaseProsecutionAttorney>
+<aopc:CaseDefendantParty.Person j:sensitivityText="false" j:sourceIDText="DIS709251891">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="DIS712607113">
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland,Deanna Michelle</j:PersonFullName></j:PersonName>
+<j:Residence>
+<j:LocationTypeText>Home</j:LocationTypeText>
+<j:LocationDescriptionText>Mailing</j:LocationDescriptionText>
+<j:LocationAddress j:sourceIDText="DIS723509844" j:lastUpdatedDate="2017-06-22">
+<j:LocationStreet>
+<j:StreetFullText>116 W High St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Residence>
+<j:PrimaryContactInformation>
+<j:ContactTelephoneNumber>
+<j:TelephoneNumberFullID>7173982170</j:TelephoneNumberFullID>
+<j:TelephoneNumberCommentText>HOME</j:TelephoneNumberCommentText></j:ContactTelephoneNumber>
+<j:ContactTelephoneNumber>
+<j:TelephoneNumberFullID>7174205798</j:TelephoneNumberFullID>
+<j:TelephoneNumberCommentText>HOME</j:TelephoneNumberCommentText></j:ContactTelephoneNumber></j:PrimaryContactInformation>
+<j:PersonDescriptionText>Defendant</j:PersonDescriptionText>
+<j:PersonBirthDate>1966-10-06</j:PersonBirthDate>
+<j:PersonBirthPlaceCode>PA</j:PersonBirthPlaceCode>
+<j:PersonAssignedIDDetails>
+<j:PersonSSNID>
+<j:ID>185569339</j:ID></j:PersonSSNID>
+<j:PersonDriverLicenseID>
+<j:ID>26646277</j:ID>
+<j:IDExpirationDate>2019-10-07</j:IDExpirationDate>
+<j:DrivingJurisdictionAuthorityCode>PA</j:DrivingJurisdictionAuthorityCode></j:PersonDriverLicenseID>
+<j:PersonStateID>
+<j:ID>19261140</j:ID></j:PersonStateID></j:PersonAssignedIDDetails>
+<j:PersonPhysicalDetails>
+<j:PersonHeightMeasure>411</j:PersonHeightMeasure>
+<j:PersonWeightMeasure>130</j:PersonWeightMeasure>
+<j:PersonEyeColorText>Hazel</j:PersonEyeColorText>
+<j:PersonEyeColorCode>HAZ</j:PersonEyeColorCode>
+<j:PersonHairColorText>Blond or Strawberry</j:PersonHairColorText>
+<j:PersonHairColorCode>BLN</j:PersonHairColorCode>
+<j:PersonSexText>Female</j:PersonSexText>
+<j:PersonSexCode>F</j:PersonSexCode>
+<j:PersonRaceText>White</j:PersonRaceText>
+<j:PersonRaceCode>W</j:PersonRaceCode></j:PersonPhysicalDetails>
+<j:PersonSocialDetails>
+<j:PersonEthnicityText>Non Hispanic</j:PersonEthnicityText>
+<j:PersonEthnicityCode>N</j:PersonEthnicityCode></j:PersonSocialDetails>
+<j:PersonAlias>
+<j:PersonAlternateName j:sourceIDText="DIS712607112">
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>M</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland,Deanna M</j:PersonFullName></j:PersonAlternateName>
+<j:PersonAlternateName j:sourceIDText="DIS712607114">
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>M.</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland,Deanna M</j:PersonFullName></j:PersonAlternateName>
+<j:PersonAlternateName j:sourceIDText="DIS712607115">
+<j:PersonPrefixName>Ms.</j:PersonPrefixName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>M.</j:PersonMiddleName>
+<j:PersonSurName>Depopolo</j:PersonSurName>
+<j:PersonFullName>Depopolo,Deanna M</j:PersonFullName></j:PersonAlternateName>
+<j:PersonAlternateName j:sourceIDText="DIS712607116">
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michele</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland,Deanna Michele</j:PersonFullName></j:PersonAlternateName>
+<j:PersonAlternateName j:sourceIDText="DIS712607117">
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland,Deanna</j:PersonFullName></j:PersonAlternateName></j:PersonAlias>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS724810134" j:lastUpdatedDate="2017-06-09">
+<j:LocationStreet>
+<j:StreetFullText>14 Mount Royal Ave</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509826" j:lastUpdatedDate="2016-10-28">
+<j:LocationStreet>
+<j:StreetFullText>1300 Baer Ave</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509827" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>433 S. High St.</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509828" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>433 S High Street</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509829" j:lastUpdatedDate="2016-10-18">
+<j:LocationStreet>
+<j:StreetFullText>14 Mt Royal Ave</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509830" j:lastUpdatedDate="2016-10-18">
+<j:LocationStreet>
+<j:StreetFullText>205 Jefferson Ave</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>York</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17401</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>Apt 6</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509831" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>211 High Street</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509832" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>121 High Street</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509833" j:lastUpdatedDate="2016-10-18">
+<j:LocationStreet>
+<j:StreetFullText>3410 Upper Westend Ave</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Trevose</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>19047</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509834" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>987 Bingaman Rd</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Orrtanna</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509835" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>301 Steinwehr Avenue</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>Room 117</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509836" j:lastUpdatedDate="2017-06-22">
+<j:LocationStreet>
+<j:StreetFullText>117 York St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509837" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>117 YORK ST</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>GETTYSBURG</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509838" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>201 S Washington St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>Apt 5</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509839" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>201 S Washington St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509840" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>117 York Street</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509841" j:lastUpdatedDate="2016-10-18">
+<j:LocationStreet>
+<j:StreetFullText>264 Walnut St Apt #2</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Phoenixville</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>19460</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509842" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>203 S Washington Street #5</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509843" j:lastUpdatedDate="2016-07-14">
+<j:LocationStreet>
+<j:StreetFullText>203 S Washington St #5</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>PRIMARY</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509845" j:lastUpdatedDate="2017-06-22">
+<j:LocationStreet>
+<j:StreetFullText>433 S High St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509846" j:lastUpdatedDate="2017-06-09">
+<j:LocationStreet>
+<j:StreetFullText>121 High St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509847" j:lastUpdatedDate="2017-06-22">
+<j:LocationStreet>
+<j:StreetFullText>211 High St</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Hanover</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17331</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>HOME</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="DIS723509848" j:lastUpdatedDate="2017-06-09">
+<j:LocationStreet>
+<j:StreetFullText>301 Steinwehr Ave</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>RM 117</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:Location>
+<j:SubjectID j:sourceIDText="DIS765199329">
+<j:ID/></j:SubjectID>
+<j:SubjectSupervision j:sourceIDText="DIS704767326">
+<j:ActivityDate>2017-06-13</j:ActivityDate>
+<j:ActivityTime>00:00:00-04:00</j:ActivityTime>
+<j:ActivityStatus>
+<j:StatusText/>
+<j:StatusDate>2017-06-13</j:StatusDate>
+<j:StatusTime>08:37:44-04:00</j:StatusTime></j:ActivityStatus>
+<j:ActivityResultText>UNABLE TO POST BAIL</j:ActivityResultText>
+<j:SupervisionFacility>
+<j:OrganizationName>Adams County Prison</j:OrganizationName>
+<j:OrganizationTypeText>COUNTY JAIL</j:OrganizationTypeText></j:SupervisionFacility>
+<j:SupervisionCustodyStatus>
+<j:StatusText/>
+<j:StatusDate>2017-10-27</j:StatusDate></j:SupervisionCustodyStatus></j:SubjectSupervision></aopc:CaseDefendantParty.Person></aopc:CaseParticipants>
+<j:CaseStatus>
+<j:StatusText>INACTIVE</j:StatusText>
+<j:StatusDate>2017-10-27</j:StatusDate></j:CaseStatus>
+<aopc:CaseCharge j:sourceIDText="DIS721736368">
+<j:ChargeSequenceID>
+<j:ID>1</j:ID></j:ChargeSequenceID>
+<j:ChargeTrackingID>
+<j:ID>T9358801</j:ID>
+<j:IDTypeDescriptionText>OTN</j:IDTypeDescriptionText></j:ChargeTrackingID>
+<j:ChargeDescriptionText>Harassment - Comm. Lewd, Threatening, Etc. Language</j:ChargeDescriptionText>
+<j:ChargeClassification>
+<j:ChargeCategoryDescriptionText>LEAD CHARGE</j:ChargeCategoryDescriptionText>
+<j:ChargeSeverityText>M3</j:ChargeSeverityText></j:ChargeClassification>
+<j:ChargeInstrument>
+<j:DocumentDescriptiveMetadata>
+<j:DocumentID>
+<j:ID>17060020I</j:ID></j:DocumentID>
+<j:DocumentTypeText>ORIGINATING DOCUMENT NUMBER</j:DocumentTypeText>
+<j:DocumentLocation>
+<j:LocationAddress>
+<j:LocationCityName>Gettysburg Borough</j:LocationCityName>
+<j:LocationCountyName>Adams</j:LocationCountyName>
+<j:AddressOther>
+<j:AddressComponentText>01</j:AddressComponentText>
+<j:AddressComponentDescriptionText>COUNTY CODE</j:AddressComponentDescriptionText></j:AddressOther>
+<j:AddressOther>
+<j:AddressComponentText>407</j:AddressComponentText>
+<j:AddressComponentDescriptionText>CITY CODE</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:DocumentLocation></j:DocumentDescriptiveMetadata></j:ChargeInstrument>
+<j:ChargeOriginator.Organization>
+<j:OrganizationORIID>
+<j:ID>PA0010100</j:ID></j:OrganizationORIID></j:ChargeOriginator.Organization>
+<aopc:ChargeStatute>
+<j:StatuteCodeID>
+<j:ID>18</j:ID></j:StatuteCodeID>
+<j:StatuteCodeSectionID>
+<j:ID>2709</j:ID></j:StatuteCodeSectionID>
+<j:StatuteOffenseID>
+<j:ID>A4</j:ID></j:StatuteOffenseID>
+<j:StatuteTypeText>STATE STATUTE</j:StatuteTypeText>
+<j:StatuteDescriptionText>Harassment - Comm. Lewd, Threatening, Etc. Language</j:StatuteDescriptionText>
+<aopc:StatuteOffenseCode.PAStatePolice>182709A4</aopc:StatuteOffenseCode.PAStatePolice></aopc:ChargeStatute>
+<aopc:ChargeOffenseDate>2017-06-10</aopc:ChargeOffenseDate>
+<aopc:ChargeOffenseTime>19:03:00-04:00</aopc:ChargeOffenseTime>
+<aopc:CurrentChargeSequenceID>
+<j:ID>1</j:ID></aopc:CurrentChargeSequenceID></aopc:CaseCharge>
+<aopc:CaseCharge j:sourceIDText="DIS721736369">
+<j:ChargeSequenceID>
+<j:ID>2</j:ID></j:ChargeSequenceID>
+<j:ChargeTrackingID>
+<j:ID>T9358801</j:ID>
+<j:IDTypeDescriptionText>OTN</j:IDTypeDescriptionText></j:ChargeTrackingID>
+<j:ChargeDescriptionText>Disorder Conduct Obscene Lang/Gest</j:ChargeDescriptionText>
+<j:ChargeClassification>
+<j:ChargeSeverityText>S</j:ChargeSeverityText></j:ChargeClassification>
+<j:ChargeInstrument>
+<j:DocumentDescriptiveMetadata>
+<j:DocumentID>
+<j:ID>17060020I</j:ID></j:DocumentID>
+<j:DocumentTypeText>ORIGINATING DOCUMENT NUMBER</j:DocumentTypeText>
+<j:DocumentLocation>
+<j:LocationAddress>
+<j:LocationCityName>Gettysburg Borough</j:LocationCityName>
+<j:LocationCountyName>Adams</j:LocationCountyName>
+<j:AddressOther>
+<j:AddressComponentText>01</j:AddressComponentText>
+<j:AddressComponentDescriptionText>COUNTY CODE</j:AddressComponentDescriptionText></j:AddressOther>
+<j:AddressOther>
+<j:AddressComponentText>407</j:AddressComponentText>
+<j:AddressComponentDescriptionText>CITY CODE</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:DocumentLocation></j:DocumentDescriptiveMetadata></j:ChargeInstrument>
+<j:ChargeOriginator.Organization>
+<j:OrganizationORIID>
+<j:ID>PA0010100</j:ID></j:OrganizationORIID></j:ChargeOriginator.Organization>
+<aopc:ChargeStatute>
+<j:StatuteCodeID>
+<j:ID>18</j:ID></j:StatuteCodeID>
+<j:StatuteCodeSectionID>
+<j:ID>5503</j:ID></j:StatuteCodeSectionID>
+<j:StatuteOffenseID>
+<j:ID>A3</j:ID></j:StatuteOffenseID>
+<j:StatuteTypeText>STATE STATUTE</j:StatuteTypeText>
+<j:StatuteDescriptionText>Disorder Conduct Obscene Lang/Gest</j:StatuteDescriptionText>
+<aopc:StatuteOffenseCode.PAStatePolice>185503A3</aopc:StatuteOffenseCode.PAStatePolice></aopc:ChargeStatute>
+<aopc:ChargeOffenseDate>2017-06-10</aopc:ChargeOffenseDate>
+<aopc:ChargeOffenseTime>19:03:00-04:00</aopc:ChargeOffenseTime>
+<aopc:CurrentChargeSequenceID>
+<j:ID>2</j:ID></aopc:CurrentChargeSequenceID></aopc:CaseCharge>
+<j:CaseClassification>
+<j:CaseCategoryText>CRIMINAL</j:CaseCategoryText></j:CaseClassification>
+<aopc:FinancialObligation>
+<j:ObligationTypeText>CTY</j:ObligationTypeText>
+<j:FinancialObligationTotalAmount>17.50</j:FinancialObligationTotalAmount>
+<aopc:ObligationTypeDescriptionText>MISCELLANEOUS ISSUANCES</aopc:ObligationTypeDescriptionText></aopc:FinancialObligation>
+<aopc:CaseExpungedIndicator>false</aopc:CaseExpungedIndicator>
+<aopc:CaseSecuredIndicator>false</aopc:CaseSecuredIndicator>
+<aopc:CaseSealedIndicator>false</aopc:CaseSealedIndicator>
+<aopc:CaseTitleRedactedIndicator>false</aopc:CaseTitleRedactedIndicator>
+<aopc:CaseRegisterOfActions>
+<aopc:RegisterAction j:sourceIDText="DIS980169793">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>13:47:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Criminal Complaint Filed</aopc:RegisterActionTypeText></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS980170177">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>13:51:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Fingerprint Order Issued</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS980170178">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>13:51:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>First Class Fingerprint Order Issued</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS980170179">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>13:51:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Certified Fingerprint Order Issued</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS980170270">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>13:51:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Summons Issued</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS980170271">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>00:00:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>First Class Summons Issued</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS980170272">
+<j:RegisterActionDate>2017-06-12</j:RegisterActionDate>
+<j:RegisterActionTime>13:51:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Certified Summons Issued</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS981074493">
+<j:RegisterActionDate>2017-06-20</j:RegisterActionDate>
+<j:RegisterActionTime>14:34:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Fingerprint Order Returned - Criminal Case</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS981459891">
+<j:RegisterActionDate>2017-06-23</j:RegisterActionDate>
+<j:RegisterActionTime>11:14:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Certified Summons Accepted</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS981459892">
+<j:RegisterActionDate>2017-06-23</j:RegisterActionDate>
+<j:RegisterActionTime>11:14:00-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>Certified Fingerprint Order Accepted</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="DIS982444831">
+<j:RegisterActionDate>2017-07-04</j:RegisterActionDate>
+<j:RegisterActionTime>01:04:09-04:00</j:RegisterActionTime>
+<aopc:RegisterActionTypeText>First Class Summons Accepted</aopc:RegisterActionTypeText>
+<aopc:RegisterActionAppliesTo>
+<j:PersonName>
+<j:PersonGivenName>Deanna</j:PersonGivenName>
+<j:PersonMiddleName>Michelle</j:PersonMiddleName>
+<j:PersonSurName>Bland</j:PersonSurName>
+<j:PersonFullName>Bland, Deanna Michelle</j:PersonFullName></j:PersonName></aopc:RegisterActionAppliesTo></aopc:RegisterAction></aopc:CaseRegisterOfActions>
+<aopc:CaseProcessingStatus>Active Bench Warrant</aopc:CaseProcessingStatus></aopc:CourtCaseEvent></jnet:Message></jnet:EventMessage></m:Notify></SOAP-ENV:Body></SOAP-ENV:Envelope>

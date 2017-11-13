@@ -14,3 +14,9 @@ gen_flatten_wsdl() {
  	mvn clean spring-boot:run -Drun.arguments="flatten,--src=$@" -f="$MVN_DIR"
 }
 
+xml_tools() {
+ 	echo "Arguments: "$@
+ 	mvn clean spring-boot:run -f="$MVN_DIR" -Drun.arguments="$@"
+}
+
+

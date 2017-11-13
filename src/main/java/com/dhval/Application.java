@@ -51,7 +51,7 @@ public class Application implements ApplicationRunner {
 
     private String parseOption(ApplicationArguments args, String opt) {
         String val = args.getOptionValues(opt).get(0);
-        // Remove any escaped spaces, no need to escape.
+        // Remove any escaped spaces, no need to escape since it is already quoted.
         return val.replaceAll("\\\\\\ ", " ");
     }
 }

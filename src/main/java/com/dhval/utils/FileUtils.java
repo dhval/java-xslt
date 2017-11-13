@@ -67,6 +67,15 @@ public class FileUtils {
         }
     }
 
+    public static void overWriteToDisk(String path, String content) throws IOException {
+        try(BufferedWriter w = new BufferedWriter(new FileWriter(path,false)))
+        {
+            w.write(content);
+        } catch(IOException e) {
+            throw e;
+        }
+    }
+
     public static boolean isFilePresent(String fileName) throws IOException {
         if(new File(fileName).exists())
             return true;

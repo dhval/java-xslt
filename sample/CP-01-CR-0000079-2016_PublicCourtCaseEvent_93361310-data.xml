@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+<SOAP-ENV:Header>
+<wsse:Security SOAP-ENV:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+<wsu:Timestamp wsu:Id="Timestamp-16a7b61e-a14a-4003-8f37-6eafc6601cc1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+<wsu:Created>2017-11-08T13:18:19Z</wsu:Created>
+<wsu:Expires>2017-11-08T13:23:19Z</wsu:Expires></wsu:Timestamp>
+<wsse:BinarySecurityToken wsu:Id="SecurityToken-4ec6d09d-23dd-4bea-9633-6eafc660d335" EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">MIIFCjCCA/KgAwIBAgIQO/TgTh+f7NRCPyk6icOdZTANBgkqhkiG9w0BAQsFADB+MQswCQYDVQQGEwJVUzEdMBsGA1UEChMUU3ltYW50ZWMgQ29ycG9yYXRpb24xHzAdBgNVBAsTFlN5bWFudGVjIFRydXN0IE5ldHdvcmsxLzAtBgNVBAMTJlN5bWFudGVjIENsYXNzIDMgU2VjdXJlIFNlcnZlciBDQSAtIEc0MB4XDTE1MTAwOTAwMDAwMFoXDTE4MTAxOTIzNTk1OVowgZIxCzAJBgNVBAYTAlVTMRUwEwYDVQQIDAxQZW5uc3lsdmFuaWExEzARBgNVBAcMCkhhcnJpc2J1cmcxJTAjBgNVBAoMHENvbW1vbndlYWx0aCBvZiBQZW5uc3lsdmFuaWExDTALBgNVBAsMBEpORVQxITAfBgNVBAMMGHdzLnRlc3Quam5ldC5zdGF0ZS5wYS51czCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANySiyhVUP5yCWADvRMIMVmgtjwLpZ0sOaccri8JHp73O6yuNQgeswwa8W7B+ER0QL4gDZ/y1fBQDKVIjBMdWynzwd2kIVE6FcsbQMmJ11D2YTTlqggDfk6FtKIo4LGBJzodZJRd4dbGSmeRHRyK56LyogRMtBg9pINvD1g4FrUMKvdD/kzjU9L8ws2jK2kGURodckHrzCM1sbop+3AUat4z7f/fI5HDJS+KXIS8pBvphlxj2JN5G5OyKgQwGg8DcK4v7sgl+YAXidmh5HpMrxaVVghu2arLXfDZvX2d+QpVfUc+dxuU+XORDSRmensbD2HNE3czRSkYXn5hVpN3OvUCAwEAAaOCAW0wggFpMCMGA1UdEQQcMBqCGHdzLnRlc3Quam5ldC5zdGF0ZS5wYS51czAJBgNVHRMEAjAAMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwYQYDVR0gBFowWDBWBgZngQwBAgIwTDAjBggrBgEFBQcCARYXaHR0cHM6Ly9kLnN5bWNiLmNvbS9jcHMwJQYIKwYBBQUHAgIwGRoXaHR0cHM6Ly9kLnN5bWNiLmNvbS9ycGEwHwYDVR0jBBgwFoAUX2DPYZBV34RDFIpgKrL1evRDGO8wKwYDVR0fBCQwIjAgoB6gHIYaaHR0cDovL3NzLnN5bWNiLmNvbS9zcy5jcmwwVwYIKwYBBQUHAQEESzBJMB8GCCsGAQUFBzABhhNodHRwOi8vc3Muc3ltY2QuY29tMCYGCCsGAQUFBzAChhpodHRwOi8vc3Muc3ltY2IuY29tL3NzLmNydDANBgkqhkiG9w0BAQsFAAOCAQEAL3YKnWpZVA7hIqotgQTvJaQkVjpxHp5/4eeQYy10i478s5kT18S2WvM2fBu5OqDLjemLH6H/KC3NeF5ZwVtQaBtERYPhoGqd4U8h+1PKAJfNv87Lwjxp/YjlUrH9jN3W9KqHdRmMN49fNStZ58Bl7y/O91gFaptjrBDs39NN7t6EV9GIAK8aQq2jaofrN8El1YU5UfRPJ57bZloNcScFXsu8X8Kmoy4QTkL12wdNyRuMkhPk5SjF5fXsoB7AWyrz4gvWnm3Rhh4UooyJukNIO5wRC1BhlfTQ0sIzWi4m24wBlIZgdj3v9Gf7aDN4gV8cbDN5D+glPJ10ThUSFiN56w==</wsse:BinarySecurityToken>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+
+<SignedInfo>
+  
+<CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+  
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+  
+<Reference URI="#Timestamp-16a7b61e-a14a-4003-8f37-6eafc6601cc1">
+    
+<Transforms>
+      
+<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    </Transforms>
+    
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    
+<DigestValue>RUIYY8P+8JTib4SECPWxG5PJ00o=</DigestValue>
+  </Reference>
+  
+<Reference URI="#SecurityToken-4ec6d09d-23dd-4bea-9633-6eafc660d335">
+    
+<Transforms>
+      
+<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    </Transforms>
+    
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    
+<DigestValue>fZCBUfupPJSNfmUYWnwT2SEL3+Y=</DigestValue>
+  </Reference>
+  
+<Reference URI="#Body-c11a1348-dc9a-4b22-9718-6eafc660ef0a">
+    
+<Transforms>
+      
+<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    </Transforms>
+    
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    
+<DigestValue>mwlP/9mh/1JQ31zQGmKj5V6jB3g=</DigestValue>
+  </Reference>
+</SignedInfo>
+    
+<SignatureValue>r79rwaRB4IYaudhTSkhri6/BEcedKPWua1HCyTjU/qCPR/NUkQlMFUNRXEeVck3SSGhcCDVVp7zuAEIbdIhXJ2L/FvTZWyY22vAcLsGP3VGFRmZRg58RxpA/3fFahlRwA7AwVay6DiOF7OXWjL/1iWStNuSGIC+ux4OQoFUmHFdmZ8L3NTxlL919uZG7ACpUCU/2rDHXv+6UI41a2r4s1X3oPGffNEJhp8Ogifh6aG6NUNnom4lFrM8jqGFwKLWas76Dhr5rNlhYMCQP7+yhtLVdIP6NccWDaeXt0qlgR6R8rnQa3eiIGIFOUm1If1Ja98ncJa8RXhEJVohKVqO02Q==</SignatureValue>
+<KeyInfo>
+<wsse:SecurityTokenReference xmlns="">
+<wsse:Reference URI="#SecurityToken-4ec6d09d-23dd-4bea-9633-6eafc660d335" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/></wsse:SecurityTokenReference></KeyInfo></Signature></wsse:Security></SOAP-ENV:Header>
+<SOAP-ENV:Body wsu:Id="Body-c11a1348-dc9a-4b22-9718-6eafc660ef0a" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+<m:Notify xmlns:m="http://jnet.state.pa.us/message/jnet/EventMessageConsumer/1">
+<jnet:EventMessage xmlns:jnet="http://www.jnet.state.pa.us/niem/JNET/jnet-core/1" xmlns:nc="http://niem.gov/niem/niem-core/2.0">
+<nc:DocumentCategoryText>EventMessage</nc:DocumentCategoryText>
+<nc:DocumentIdentification>
+<nc:IdentificationID>8974-7ad5-7c7a-cd2a-15fb-18ebad3</nc:IdentificationID></nc:DocumentIdentification>
+<nc:DocumentPostDate>
+<nc:DateTime>2017-11-08T13:18:19.864Z</nc:DateTime></nc:DocumentPostDate>
+<nc:DocumentSource>
+<nc:EntityOrganization>
+<nc:OrganizationName>AOPC</nc:OrganizationName></nc:EntityOrganization></nc:DocumentSource>
+<nc:DocumentSubjectText>PublicCourtCaseEvent</nc:DocumentSubjectText>
+<jnet:HeaderField>
+<jnet:HeaderName>To</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://www.w3.org/2005/08/addressing</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>jms:topic://jnet.aopc.CourtNotice</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>MessageID</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://www.w3.org/2005/08/addressing</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>db174b54d0f511e5a770f565c7b0c576</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>Action</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://www.w3.org/2005/08/addressing</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>http://jnet.state.pa.us/jxdm/aopc/CourtCaseEvent/SentencePublish</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>CaseTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>COURT</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>CourtTypeCode</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>COC</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>CountyCode</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>01</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>JurisdictionCode</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>51</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>DocketTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>CRIMINAL</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>DocketNumberText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>CP-01-CR-0000079-2016</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>ServiceTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>MESSAGE-XML</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>ActionTypeText</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>GUILTY PLEA FILED</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:HeaderField>
+<jnet:HeaderName>MessageTimestampDateTime</jnet:HeaderName>
+<jnet:HeaderNamespaceURI>http://jnet.state.pa.us/jxdm/aopc/wsa-ref</jnet:HeaderNamespaceURI>
+<jnet:HeaderValueText>2016-02-11T14:30:07.014-05:00</jnet:HeaderValueText></jnet:HeaderField>
+<jnet:Message>
+<aopc:CourtCaseEvent xsi:schemaLocation="http://jnet.state.pa.us/jxdm/aopc CourtCaseEvent.xsd" j:sourceIDText="CPCMS701127619" xmlns:aopc="http://jnet.state.pa.us/jxdm/aopc" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:ref="http://jnet.state.pa.us/jxdm/aopc/wsa-ref" xmlns:j="http://www.it.ojp.gov/jxdm/3.0" xmlns:usps="http://www.it.ojp.gov/jxdm/usps_states/1.0" xmlns:ncic="http://www.it.ojp.gov/jxdm/ncic_2000/1.0" xmlns:nibrs="http://www.it.ojp.gov/jxdm/nibrs_misc/1.0" xmlns:ansi="http://www.it.ojp.gov/jxdm/ansi_d20/1.0">
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>PROCESS NAME</j:MetadataFieldName>
+<j:MetadataFieldValueText>CPSSentencePublish</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>EVENT ID</j:MetadataFieldName>
+<j:MetadataFieldValueText>1dd75a78acd34507b822d2fda269cc3b</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>EVENT TYPE ID</j:MetadataFieldName>
+<j:MetadataFieldValueText>2060</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>SOURCE EVENT ID</j:MetadataFieldName>
+<j:MetadataFieldValueText>724763753</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:DocumentOtherMetadataField>
+<j:MetadataFieldName>EVENT TIMESTAMP</j:MetadataFieldName>
+<j:MetadataFieldValueText>2016-02-11 10:56:00.0</j:MetadataFieldValueText></j:DocumentOtherMetadataField>
+<j:ActivityTypeText>GUILTY PLEA FILED</j:ActivityTypeText>
+<j:ActivityDate>2016-02-11</j:ActivityDate>
+<j:ActivityTime>10:49:00-05:00</j:ActivityTime>
+<j:ActivityInitiatingInstrument>
+<j:DocumentDescriptiveMetadata>
+<j:DocumentFiledDate>2016-02-11</j:DocumentFiledDate></j:DocumentDescriptiveMetadata></j:ActivityInitiatingInstrument>
+<j:CaseTitleText>Comm. v. Johnson, Tony Aaron</j:CaseTitleText>
+<j:CaseDocketID>
+<j:ID>CP-01-CR-0000079-2016</j:ID></j:CaseDocketID>
+<j:CaseCourt>
+<j:OrganizationName>Criminal Division - Adams</j:OrganizationName>
+<j:OrganizationLocation>
+<j:LocationAddress>
+<j:LocationStreet>
+<j:StreetFullText>Adams County Courthouse</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationCountyName>Adams</j:LocationCountyName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>01</j:AddressComponentText>
+<j:AddressComponentDescriptionText>COUNTY CODE</j:AddressComponentDescriptionText></j:AddressOther>
+<j:AddressOther>
+<j:AddressComponentText>111-117 Baltimore Street</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:OrganizationLocation>
+<j:OrganizationJurisdiction>
+<j:JurisdictionText>51</j:JurisdictionText>
+<j:JurisdictionID>
+<j:ID>CP-51-01-Crim</j:ID></j:JurisdictionID></j:OrganizationJurisdiction>
+<j:CourtTypeCode>COC</j:CourtTypeCode></j:CaseCourt>
+<aopc:CaseDetails>
+<j:CaseDefendantSelfRepresentationIndicator>false</j:CaseDefendantSelfRepresentationIndicator>
+<j:CaseSubtypeText>Court Case</j:CaseSubtypeText></aopc:CaseDetails>
+<j:CaseDisposition>
+<j:CaseDispositionFinalDate>2016-02-11</j:CaseDispositionFinalDate>
+<j:CaseDispositionDecision>
+<j:CaseDispositionDecisionText>Guilty Plea</j:CaseDispositionDecisionText></j:CaseDispositionDecision></j:CaseDisposition>
+<aopc:CaseParticipants>
+<j:CaseInitiatingParty.Person j:sensitivityText="false" j:sourceIDText="CPCMS200880">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="CPCMS200880">
+<j:PersonGivenName/>
+<j:PersonSurName>Biglerville</j:PersonSurName>
+<j:PersonFullName>Biglerville</j:PersonFullName></j:PersonName>
+<j:Employment>
+<j:EmploymentAssignedUnit.Organization>
+<j:OrganizationORIID>
+<j:ID>PA0011500</j:ID></j:OrganizationORIID></j:EmploymentAssignedUnit.Organization></j:Employment></j:CaseInitiatingParty.Person>
+<j:CaseProsecutionAttorney j:sensitivityText="false" j:sourceIDText="CPCMS2036">
+<j:PersonName j:sensitivityText="false" j:sourceIDText="CPCMS2036">
+<j:PersonGivenName/>
+<j:PersonSurName>Adams County District Attorney's Office</j:PersonSurName>
+<j:PersonFullName>Adams County District Attorney's Office</j:PersonFullName></j:PersonName>
+<j:PrimaryContactInformation>
+<j:ContactTelephoneNumber>
+<j:TelephoneNumberFullID>7173379840</j:TelephoneNumberFullID>
+<j:TelephoneNumberCommentText>OFFICE</j:TelephoneNumberCommentText></j:ContactTelephoneNumber></j:PrimaryContactInformation>
+<j:PersonDescriptionText>Lead Attorney</j:PersonDescriptionText>
+<j:PersonWorkLocation.Location>
+<j:LocationTypeText>Case Work</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="CPCMS200200639">
+<j:LocationStreet>
+<j:StreetFullText>Adams County Courthouse</j:StreetFullText></j:LocationStreet>
+<j:LocationCityName>Gettysburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17325</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentText>111-117 Baltimore Street</j:AddressComponentText>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:PersonWorkLocation.Location>
+<j:JudicialOfficialBarMembership>
+<j:JudicialOfficialBarID>
+<j:ID/></j:JudicialOfficialBarID></j:JudicialOfficialBarMembership>
+<j:CaseOfficialRoleText>Prosecution</j:CaseOfficialRoleText>
+<j:CaseOfficialRoleDescriptionText>Prosecutor</j:CaseOfficialRoleDescriptionText></j:CaseProsecutionAttorney>
+<aopc:CaseDefendantParty.Person j:sourceIDText="CPCMS201376055">
+<j:PersonName j:sourceIDText="CPCMS60060874">
+<j:PersonPrefixName>Mr.</j:PersonPrefixName>
+<j:PersonGivenName>Tony</j:PersonGivenName>
+<j:PersonMiddleName>Aaron</j:PersonMiddleName>
+<j:PersonSurName>Johnson</j:PersonSurName>
+<j:PersonFullName>Johnson,Tony Aaron</j:PersonFullName></j:PersonName>
+<j:Residence>
+<j:LocationTypeText>Home</j:LocationTypeText>
+<j:LocationDescriptionText>Mailing</j:LocationDescriptionText>
+<j:LocationAddress j:sourceIDText="CPCMS203219587" j:lastUpdatedDate="2014-06-29">
+<j:LocationStreet/>
+<j:LocationCityName>Hbg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17110</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Residence>
+<j:PersonDescriptionText>Defendant</j:PersonDescriptionText>
+<j:PersonBirthDate>1968-09-24</j:PersonBirthDate>
+<j:PersonSocialDetails>
+<j:PersonEthnicityText>Unknown</j:PersonEthnicityText>
+<j:PersonEthnicityCode>U</j:PersonEthnicityCode></j:PersonSocialDetails>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="CPCMS60123102" j:lastUpdatedDate="2014-01-26">
+<j:LocationStreet/>
+<j:LocationCityName/>
+<j:LocationPostalCodeID>
+<j:ID>17102</j:ID></j:LocationPostalCodeID>
+<j:AddressOther>
+<j:AddressComponentDescriptionText>ADDRESS LINE 2</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="CPCMS100552003" j:lastUpdatedDate="2007-07-10">
+<j:LocationStreet/>
+<j:LocationCityName>PHILA.</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>19100</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="CPCMS101904005" j:lastUpdatedDate="2007-07-10">
+<j:LocationStreet/>
+<j:LocationCityName>PHILA.</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>19100</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="CPCMS60063854" j:lastUpdatedDate="2007-07-10">
+<j:LocationStreet/>
+<j:LocationCityName>Harrisburg</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>17102</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location>
+<j:Location>
+<j:LocationTypeText>OTHER</j:LocationTypeText>
+<j:LocationAddress j:sourceIDText="CPCMS101009732" j:lastUpdatedDate="2007-07-10">
+<j:LocationStreet/>
+<j:LocationCityName>PHILA.</j:LocationCityName>
+<j:LocationStateCode.USPostalService>PA</j:LocationStateCode.USPostalService>
+<j:LocationPostalCodeID>
+<j:ID>19100</j:ID></j:LocationPostalCodeID></j:LocationAddress></j:Location></aopc:CaseDefendantParty.Person></aopc:CaseParticipants>
+<j:CaseStatus>
+<j:StatusText>ADJUDICATED</j:StatusText>
+<j:StatusDate>2016-02-11</j:StatusDate></j:CaseStatus>
+<aopc:CaseCharge j:sourceIDText="CPCMS704042370">
+<j:ChargeSequenceID>
+<j:ID>1</j:ID></j:ChargeSequenceID>
+<j:ChargeTrackingID>
+<j:ID>R0779446</j:ID>
+<j:IDTypeDescriptionText>OTN</j:IDTypeDescriptionText></j:ChargeTrackingID>
+<j:ChargeClassification>
+<j:ChargeCategoryDescriptionText>LEAD CHARGE</j:ChargeCategoryDescriptionText>
+<j:ChargeSeverityText>S</j:ChargeSeverityText></j:ChargeClassification>
+<j:ChargeDisposition j:sourceIDText="CPCMS702262468">
+<j:ChargeDispositionOtherText>101</j:ChargeDispositionOtherText>
+<j:ChargeDispositionDate>2016-02-11</j:ChargeDispositionDate>
+<j:ChargeDispositionDescriptionText>Guilty Plea</j:ChargeDispositionDescriptionText></j:ChargeDisposition>
+<j:ChargeInstrument>
+<j:DocumentDescriptiveMetadata>
+<j:DocumentLocation>
+<j:LocationAddress>
+<j:LocationCityName>Abbottstown Boro</j:LocationCityName>
+<j:LocationCountyName>Adams</j:LocationCountyName>
+<j:AddressOther>
+<j:AddressComponentText>01</j:AddressComponentText>
+<j:AddressComponentDescriptionText>COUNTY CODE</j:AddressComponentDescriptionText></j:AddressOther>
+<j:AddressOther>
+<j:AddressComponentText>401</j:AddressComponentText>
+<j:AddressComponentDescriptionText>CITY CODE</j:AddressComponentDescriptionText></j:AddressOther></j:LocationAddress></j:DocumentLocation></j:DocumentDescriptiveMetadata></j:ChargeInstrument>
+<j:ChargeOriginator.Organization>
+<j:OrganizationORIID>
+<j:ID>PA0011500</j:ID></j:OrganizationORIID></j:ChargeOriginator.Organization>
+<aopc:ChargeStatute>
+<j:StatuteCodeID>
+<j:ID>75</j:ID></j:StatuteCodeID>
+<j:StatuteCodeSectionID>
+<j:ID>3327</j:ID></j:StatuteCodeSectionID>
+<j:StatuteOffenseID>
+<j:ID>A1-SI</j:ID></j:StatuteOffenseID>
+<j:StatuteTypeText>STATE STATUTE</j:StatuteTypeText>
+<j:StatuteDescriptionText>Serious Injury - Duty of Driver in Emergency Response Areas - Pass in Lane Not Adjacent to Area</j:StatuteDescriptionText></aopc:ChargeStatute>
+<aopc:ChargeOffenseDate>2016-02-11</aopc:ChargeOffenseDate>
+<aopc:ChargeOffenseEndDate>2016-02-11</aopc:ChargeOffenseEndDate>
+<aopc:CurrentChargeSequenceID>
+<j:ID>1</j:ID></aopc:CurrentChargeSequenceID></aopc:CaseCharge>
+<j:CaseClassification>
+<j:CaseCategoryText>CRIMINAL</j:CaseCategoryText></j:CaseClassification>
+<aopc:CaseTitleRedactedIndicator>false</aopc:CaseTitleRedactedIndicator>
+<aopc:CaseRegisterOfActions>
+<aopc:RegisterAction j:sourceIDText="CPCMS739325142">
+<j:RegisterActionDate>2016-02-11</j:RegisterActionDate>
+<j:RegisterActionTime>10:49:00-05:00</j:RegisterActionTime>
+<j:RegisterActionTitle>Original Papers Received from Lower Court</j:RegisterActionTitle>
+<aopc:RegisterActionTypeText>Original Papers Received from Lower Court</aopc:RegisterActionTypeText>
+<aopc:RegisterActionFiler>
+<j:PersonName>
+<j:PersonGivenName/>
+<j:PersonSurName>Court of Common Pleas - Adams County</j:PersonSurName>
+<j:PersonFullName>Court of Common Pleas - Adams County</j:PersonFullName></j:PersonName></aopc:RegisterActionFiler></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="CPCMS739325144">
+<j:RegisterActionDate>2016-02-11</j:RegisterActionDate>
+<j:RegisterActionTime>10:53:40-05:00</j:RegisterActionTime>
+<j:RegisterActionTitle>DL-21 to be Prepared</j:RegisterActionTitle>
+<aopc:RegisterActionTypeText>DL-21 to be Prepared</aopc:RegisterActionTypeText>
+<aopc:RegisterActionFiler>
+<j:PersonName>
+<j:PersonGivenName>Kelly</j:PersonGivenName>
+<j:PersonMiddleName>A.</j:PersonMiddleName>
+<j:PersonSurName>Lawver</j:PersonSurName>
+<j:PersonFullName>Lawver, Kelly A.</j:PersonFullName></j:PersonName></aopc:RegisterActionFiler></aopc:RegisterAction>
+<aopc:RegisterAction j:sourceIDText="CPCMS739325146">
+<j:RegisterActionDate>2016-02-11</j:RegisterActionDate>
+<j:RegisterActionTime>10:56:00-05:00</j:RegisterActionTime>
+<j:RegisterActionTitle>Guilty Plea</j:RegisterActionTitle>
+<aopc:RegisterActionTypeText>Guilty Plea</aopc:RegisterActionTypeText>
+<aopc:RegisterActionFiler>
+<j:PersonName>
+<j:PersonGivenName>Robert</j:PersonGivenName>
+<j:PersonMiddleName>G.</j:PersonMiddleName>
+<j:PersonSurName>Bigham</j:PersonSurName>
+<j:PersonFullName>Bigham, Robert G.</j:PersonFullName></j:PersonName></aopc:RegisterActionFiler></aopc:RegisterAction></aopc:CaseRegisterOfActions>
+<aopc:CaseProcessingStatus>Awaiting Sentencing</aopc:CaseProcessingStatus></aopc:CourtCaseEvent></jnet:Message></jnet:EventMessage></m:Notify></SOAP-ENV:Body></SOAP-ENV:Envelope>
