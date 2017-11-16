@@ -47,10 +47,12 @@ public class ExtractXPathTest {
         XPathSelector xPathSelector = xpath.compile("//row/column[1]/value[1]").load();
         xPathSelector.setContextItem(xmlDoc);
 */
-        XPathSelector selector = SaxonUtils.getXPathSelector(Constants.TMP_DATA_FILE, "//row");
+        XPathSelector selector = SaxonUtils.getXPathSelector("export-data.xml", "//row");
 
         for (XdmItem rowItem : selector) {
-            XdmSequenceIterator columnItr = ((XdmNode) rowItem).axisIterator(Axis.CHILD, new QName("column"));
+            XdmSequenceIterator columnItr = ((XdmNode) rowItem).axisIterator(Axis.CHILD, new QName("LastName"));
+            System.out.println(columnItr.next().getStringValue());
+            /**
             if (columnItr.hasNext()) {
                 XdmNode column = (XdmNode) columnItr.next();
                 XdmSequenceIterator valueItr = column.axisIterator(Axis.CHILD, new QName("value"));
@@ -59,6 +61,7 @@ public class ExtractXPathTest {
                     System.out.println(val);
                 }
             }
+             **/
 
         }
     }

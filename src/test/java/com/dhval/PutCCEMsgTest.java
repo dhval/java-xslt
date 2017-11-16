@@ -31,8 +31,10 @@ public class PutCCEMsgTest {
             String num = Integer.toString(nbr);
             queryMap.put("CountyCode", num);
             queryMap.put("Action", "http://jnet.state.pa.us/jxdm/aopc/CourtCaseEvent/" + ACTIONS[actionId]);
-            ResponseEntity<String> response = post.post(queryMap);
-            System.out.println("Serialized result: " + response.toString());
+            for (String path: FILES) {
+                ResponseEntity<String> response = post.post(queryMap, path);
+                System.out.println("Serialized result: " + response.toString());
+            }
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -40,12 +42,14 @@ public class PutCCEMsgTest {
 
     @Test
     public void run() throws Exception {
-         IntStream.range(1, 5).forEach( county -> {
-                         IntStream.range(1, 5).forEach(actionId -> {
+         for(int i =0; i <3; i++) {
+         IntStream.of(19, 49, 50, 51).forEach( county -> {
+                         IntStream.range(0, 5).forEach(actionId -> {
                              postJson(county, actionId);
                          });
                  }
          );
+         }
     }
 
     private Map<String, String> queryMap() {
@@ -63,9 +67,26 @@ public class PutCCEMsgTest {
 
     private static final String[] ACTIONS = {
             "CaseInitiationPublish",
-            "CaseInitiationPublish",
-            "CaseInitiationPublish",
-            "CaseInitiationPublish",
-            "CaseInitiationPublish"
+            "CalendarPublish",
+            "SentencePublish",
+            "CaseBindOverPublish",
+            "OffensePublish",
+            "LifeCyclePublish"
     };
+
+    private static final String[] FILES = {
+            "sample/CP-01-CR-0000079-2016_PublicCourtCaseEvent_93361310-data.xml",
+            "sample/MJ-51301-CR-0000195-2017_CourtCaseEvent_93363352-data.xml",
+            "sample/MJ-09101-TR-0000162-2013.xml",
+            "sample/MJ-51301-CR-0000195-2017.xml",
+            "sample/MJ-51301-CR-0000195-2017-2.xml"
+    };
+
+    /**
+     CCE.INBOUND.QUEUE
+
+     CCE.REPLY.INBOUND.QUEUE
+
+     PUBLIC.CCE.REPLY.INBOUND.QUEUE
+     */
 }

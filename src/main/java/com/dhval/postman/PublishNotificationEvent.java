@@ -14,26 +14,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
-import java.util.AbstractMap;
-import java.util.Collections;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
-public class PutCCEMsg extends SOAPClient {
+public class PublishNotificationEvent extends SOAPClient {
 
-    public PutCCEMsg( @Value("${client.ws.mq}") String clientURL) {
+    public PublishNotificationEvent(@Value("${client.ws.jems}") String clientURL) {
         super(clientURL);
     }
 
-    public ResponseEntity<String> post(Map<String, String> queryMap) throws Exception {
-        return transform(queryMap, new ClassPathResource(Constants.XSL_FILE_CCE).getFile(),
-                new File(Constants.XML_INPUT_CCE));
-    }
-
     public ResponseEntity<String> post(Map<String, String> queryMap, String filePath) throws Exception {
-        return transform(queryMap, new ClassPathResource(Constants.XSL_FILE_CCE).getFile(),
+        return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getFile(),
                 new File(filePath));
     }
 

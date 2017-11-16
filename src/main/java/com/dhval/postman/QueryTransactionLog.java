@@ -79,7 +79,18 @@ public class QueryTransactionLog {
 
     private String getFileName(String id, String rsp)  throws IOException, SaxonApiException {
         String fileType = "";
-        XPathSelector xpSelect =  SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='DocumentSubjectText']");
+        // Clean
+        XPathSelector xpSelect =  SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='MessageKeyCodeText']");
+        if (xpSelect.iterator().hasNext()) {
+            fileType = ((XdmNode) xpSelect.iterator().next()).getStringValue();
+            xpSelect =  SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='ControlFieldText']");
+            if (xpSelect.iterator().hasNext()) {
+                fileType += "-" + ((XdmNode) xpSelect.iterator().next()).getStringValue();
+            }
+            return fileType + "-" + id;
+        }
+        // Event M
+        xpSelect =  SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='DocumentSubjectText']");
         if (xpSelect.iterator().hasNext()) {
             fileType = ((XdmNode) xpSelect.iterator().next()).getStringValue();
         } else {
