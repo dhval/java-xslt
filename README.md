@@ -16,6 +16,8 @@ boot 'schema,--src=/Users/user/OneDrive\ -\ Commonwealth\ of\ Pennsylvania/OA5TP
 
 ````
 mvn test -Dtest=PublishNotificationEventTest
+ mvn spring-boot:run -Ddata.config=config.json
+  mvn spring-boot:run -Ddata.config=config.json -Drun.arguments="--task=PublishEvent"
 ```
 
 https://github.com/paginagmbh/Drill-Xerces

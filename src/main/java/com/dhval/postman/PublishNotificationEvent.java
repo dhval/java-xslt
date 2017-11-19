@@ -14,18 +14,33 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
+import java.util.AbstractMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class PublishNotificationEvent extends SOAPClient {
+    private Map<String, String> queryMap;
 
     public PublishNotificationEvent(@Value("${client.ws.jems}") String clientURL) {
         super(clientURL);
     }
 
-    public ResponseEntity<String> post(Map<String, String> queryMap, String filePath) throws Exception {
+    public void build(String endPoint, String profile) {
+        queryMap = queryMap(endPoint, profile);
+    }
+
+    public ResponseEntity<String> post(String filePath) throws Exception {
         return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getFile(),
                 new File(filePath));
+    }
+
+    private Map<String, String> queryMap(String url, String agency) {
+        return Stream.of (
+                new AbstractMap.SimpleEntry<>("Agency", agency),
+                new AbstractMap.SimpleEntry<>("Target", url)
+        ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
     }
 
 }

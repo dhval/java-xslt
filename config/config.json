@@ -1,0 +1,9 @@
+{
+  "data": {
+    "endpoint": "https://www.igxs-sat.state.pa.us/sat/EventMessageConsumerService",
+    "files": [
+      "tmp/ERInmate-66ca-a9b5-5bf2-351e-15f0-127e21e-data.xml",
+      "tmp/ERInmateMaintenance.xml"],
+    "profile": "DHS_MEDICALASSISTANCE"
+  }
+}

@@ -15,8 +15,14 @@ gen_flatten_wsdl() {
 }
 
 xml_tools() {
- 	echo "Arguments: "$@
- 	mvn clean spring-boot:run -f="$MVN_DIR" -Drun.arguments="$@"
+ 	echo "Arguments: "
+ 	echo $(cat config.json)
+ 	SPRING_APPLICATION_JSON=$(cat config.json) mvn test -Dtest=ConfigTest
+}
+
+publish() {
+ 	echo "JSON Config: "$@
+    mvn spring-boot:run -f="$MVN_DIR" -Drun.arguments="--task=$1" -Ddata.config="$2"
 }
 
 

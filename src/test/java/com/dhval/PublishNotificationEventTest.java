@@ -7,11 +7,14 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,18 +26,32 @@ public class PublishNotificationEventTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    String url = "https://www.igxs-sat.state.pa.us/sat/EventMessageConsumerService";
-    String agency = "DHS_MEDICALASSISTANCE";
+    /**
+     * "tmp/ERInmate-66ca-a9b5-5bf2-351e-15f0-127e21e-data.xml",
+     "tmp/ERInmateMaintenance.xml"
+     = "https://www.igxs-sat.state.pa.us/sat/EventMessageConsumerService"
+     = "DHS_MEDICALASSISTANCE"
+     */
+
+    @Value("${data.endpoint}")
+    String url;
+    @Value("${data.profile}")
+    String agency;
+
+    @Value("#{${data.files}}")
+    Map<String, String> FILES;
+
+    //@Value("#{${propertyname}}")  private Map<String,String> propertyname;
 
     @Autowired
     PublishNotificationEvent post;
 
-    private void postJson(Map<String, String> queryMap, String filePath) {
+    private void postJson(String filePath) {
 
         try {
-            ResponseEntity<String> response = post.post(queryMap, filePath);
-            System.out.println(filePath);
-            System.out.println("Serialized result: " + response.toString());
+            ResponseEntity<String> response = post.post(filePath);
+            LOG.info(filePath);
+            LOG.info("Serialized result: " + response.toString());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -42,22 +59,12 @@ public class PublishNotificationEventTest {
 
     @Test
     public void run() throws Exception {
-        Map<String, String> queryMap = queryMap(url, agency);
-        for (String path: FILES) {
-            postJson(queryMap, path);
+        post.build(url, agency);
+        LOG.info(FILES.toString());
+        for (String path: FILES.keySet()) {
+            LOG.info("File- " + FILES.get(path));
+            postJson(path);
         }
     }
-
-    private Map<String, String> queryMap(String url, String agency) {
-        return Stream.of (
-                new AbstractMap.SimpleEntry<>("Agency", agency),
-                new AbstractMap.SimpleEntry<>("Target", url)
-        ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
-    }
-
-    private static final String[] FILES = {
-            "tmp/ERInmate-66ca-a9b5-5bf2-351e-15f0-127e21e-data.xml",
-            "tmp/ERInmateMaintenance.xml"
-    };
 
 }

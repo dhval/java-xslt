@@ -22,6 +22,11 @@ public abstract class SOAPClient {
         this.clientURL = clientURL;
     }
 
+    public ResponseEntity<String> post(String filePath) throws Exception {
+        // TODO
+        return null;
+    };
+
     public ResponseEntity<String> transform(Map<String, String> queryMap, File xslFile, File xmlFile)
             throws SaxonApiException, IOException, URISyntaxException {
         Processor proc = new Processor(false);
