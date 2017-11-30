@@ -1,10 +1,11 @@
 {
   "data": {
-    "name": "PublishEvent",
+    "name": "DHS ERII PublishEvent",
     "endpoint": "https://www.igxs-sat.state.pa.us/sat/EventMessageConsumerService",
     "files": [
       "tmp/ERInmate-66ca-a9b5-5bf2-351e-15f0-127e21e-data.xml",
-      "tmp/ERInmateMaintenance.xml"
+      "tmp/ERInmateMaintenance.xml",
+      "tmp/StateOffenderEvent-2147-ef7e-6de6-f8c3-15fe-b62769b-data.xml"
     ],
     "profile": "DHS_MEDICALASSISTANCE"
   }

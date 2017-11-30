@@ -1,0 +1,11 @@
+{
+  "data": {
+    "name": "DOC PublishCCE",
+    "endpoint": "https://oactciss217.pa.lcl/cce_services_reply/SGS.AOPC.OTN.Reply.svc",
+    "files": [
+      "sample/CourtCaseEvent-MJ-09101-TR-0000162-2013-data.xml",
+      "sample/CourtCaseEvent-MJ-51301-CR-0000195-2017-data.xml"
+    ],
+    "profile": "PCS"
+  }
+}

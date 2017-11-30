@@ -77,7 +77,7 @@ public class FileUtils {
     }
 
     public static boolean isFilePresent(String fileName) throws IOException {
-        if(new File(fileName).exists())
+        if(new File(fileName).isFile())
             return true;
         return false;
     }

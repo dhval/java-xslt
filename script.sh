@@ -22,7 +22,7 @@ xml_tools() {
 
 publish() {
  	echo "JSON Config: "$@
-    mvn spring-boot:run -f="$MVN_DIR" -Drun.arguments="--task=$1" -Ddata.config="$2"
+    mvn spring-boot:run -f="$MVN_DIR" -Drun.arguments="--task=$1" -Ddata.config="$2" -Drun.jvmArguments="-Xmx1024m"
 }
 
 

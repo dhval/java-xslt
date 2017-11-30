@@ -12,7 +12,7 @@ data/
 .springBeans
 *.xjb
 *.out
-tmp/
+tmp*/
 
 ### IntelliJ IDEA ###
 .idea

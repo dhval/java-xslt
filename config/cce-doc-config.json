@@ -1,0 +1,11 @@
+{
+  "data": {
+    "name": "DOC PublishCCE",
+    "endpoint": "https://uat.captorapi.cor.state.pa.us/cce/CCEReply.svc",
+    "files": [
+      "sample/CourtCaseEvent-MJ-09101-TR-0000162-2013-data.xml",
+      "sample/CourtCaseEvent-MJ-51301-CR-0000195-2017-data.xml"
+    ],
+    "profile": "DOC"
+  }
+}

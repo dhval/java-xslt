@@ -3,6 +3,7 @@ package com.dhval.task;
 import com.dhval.Application;
 import com.dhval.postman.PublishNotificationEvent;
 import com.dhval.postman.SOAPClient;
+import com.dhval.utils.FileUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,15 +39,23 @@ public class PublishEvent extends Task {
     @PostConstruct
     private void configure() {
         try {
-            Map readValue = new ObjectMapper().readValue(new File(configJson), Map.class);
-            Map data = (Map) readValue.get("data");
-            endPoint = (String) data.get("endpoint");
-            profile = (String) data.get("profile");
-            files = (List<String>) data.get("files");
-            LOG.info("D!" + data.get("name"));
+            if (!FileUtils.isFilePresent(configJson)) {
+                return;
+            }
+            init(configJson);
         } catch (Exception e) {
             LOG.warn(e.getMessage(), e);
         }
+    }
+
+    public Task init(String config) throws Exception {
+        Map readValue = new ObjectMapper().readValue(new File(config), Map.class);
+        Map data = (Map) readValue.get("data");
+        endPoint = (String) data.get("endpoint");
+        profile = (String) data.get("profile");
+        files = (List<String>) data.get("files");
+        LOG.info("D!" + data.get("name"));
+        return this;
     }
 
     public void run() throws Exception {

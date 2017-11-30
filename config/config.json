@@ -1,9 +1,36 @@
 {
   "data": {
-    "endpoint": "https://www.igxs-sat.state.pa.us/sat/EventMessageConsumerService",
-    "files": [
-      "tmp/ERInmate-66ca-a9b5-5bf2-351e-15f0-127e21e-data.xml",
-      "tmp/ERInmateMaintenance.xml"],
-    "profile": "DHS_MEDICALASSISTANCE"
+    "name": "DOC PublishCCE",
+    "directory": "/Users/dhval/projects/github/xsl-tool/tmp",
+    "profiles": [
+      {
+        "endpoint": "https://uat.captorapi.cor.state.pa.us/cce/CCEReply.svc",
+        "profile": "DOC"
+      },
+      {
+        "endpoint": "https://www.igxs-sat.state.pa.us/sat/EventMessageConsumerService",
+        "profile": "DHS_MEDICALASSISTANCE"
+      },
+      {
+        "endpoint": "https://oactciss217.pa.lcl/cce_services_reply/SGS.AOPC.OTN.Reply.svc",
+        "profile": "PCS"
+      },
+      {
+        "endpoint": "https://63.145.230.217/PADOC/EventMessageConsumer.svc",
+        "profile": "COLUCO_DA"
+      },
+      {
+        "endpoint": "https://209.50.153.90/CCEResponse/ws/CCEResponse",
+        "profile": "COLUMBIA_CR_BTM"
+      },
+      {
+        "endpoint": "https://63.145.230.217/PADOC/EventMessageConsumer.svc",
+        "profile": "GTL_DOC"
+      },
+      {
+        "endpoint": "https://erhbginfd21.pa.lcl/JNET_EMS/JEMS.svc",
+        "profile": "SERS"
+      }
+    ]
   }
 }

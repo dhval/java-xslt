@@ -16,6 +16,10 @@ public class QueryLog extends Task {
     @Autowired
     QueryTransactionLog query;
 
+    public Task init(String config) throws Exception {
+        return this;
+    }
+
     public void run() throws Exception {
         List<String> values = query.queryForAvailableData();
         LOG.info(values.toString());
