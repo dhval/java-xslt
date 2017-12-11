@@ -40,7 +40,7 @@ public class Publisher extends Task {
 
     private String clientURL;
     private String xsltFilePath;
-    private String xpathExpression;
+    private List<String> xpathExpression;
     private List<Map<String, String>> profiles;
     private String[] files;
 
@@ -53,9 +53,9 @@ public class Publisher extends Task {
             clientURL = (String) cfg.get("endpoint");
             String directory = (String) cfg.get("directory");
             xsltFilePath = (String) cfg.get("xslt-path");
-            xpathExpression = (String) cfg.get("xpath-expression");
+            xpathExpression = (List<String>) cfg.get("xpath-expression");
             profiles = (List<Map<String, String>>) data.get("profiles");
-            files = SaxonUtils.filesMatchingXpath(directory, new String[] {xpathExpression});
+            files = SaxonUtils.filesMatchingXpath(directory, xpathExpression.toArray(new String[0]));
             //   FileUtils.allFilesByType(directory, "xml");
             LOG.info("D!" + cfg.get("name") + xpathExpression + " files#" + files.length);
         } catch (Exception e) {
