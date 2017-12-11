@@ -28,12 +28,12 @@ public class PutCCEMsg extends SOAPClient {
     }
 
     public ResponseEntity<String> post(Map<String, String> queryMap) throws Exception {
-        return transform(queryMap, new ClassPathResource(Constants.XSL_FILE_CCE).getFile(),
+        return transform(queryMap, new ClassPathResource(Constants.XSL_FILE_CCE).getInputStream(),
                 new File(Constants.XML_INPUT_CCE));
     }
 
     public ResponseEntity<String> post(Map<String, String> queryMap, String filePath) throws Exception {
-        return transform(queryMap, new ClassPathResource(Constants.XSL_FILE_CCE).getFile(),
+        return transform(queryMap, new ClassPathResource(Constants.XSL_FILE_CCE).getInputStream(),
                 new File(filePath));
     }
 

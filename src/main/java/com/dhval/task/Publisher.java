@@ -1,7 +1,9 @@
 package com.dhval.task;
 
+import com.dhval.config.JSONConfig;
 import com.dhval.postman.SOAPClient;
 import com.dhval.utils.FileUtils;
+import com.dhval.utils.SaxonUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +20,10 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,28 +32,32 @@ import java.util.stream.Stream;
 public class Publisher extends Task {
     private static final Logger LOG = LoggerFactory.getLogger(Publisher.class);
 
-    @Value("${client.ws.jems}")
-    String clientURL;
-
-    @Value("${data.config:config/config.json}")
-    String configJson;
+    @Autowired
+    private JSONConfig config;
 
     @Autowired
     TaskExecutor taskExecutor;
 
-    private String[] files;
+    private String clientURL;
+    private String xsltFilePath;
+    private String xpathExpression;
     private List<Map<String, String>> profiles;
+    private String[] files;
 
 
     @PostConstruct
     private void configure() {
         try {
-            Map readValue = new ObjectMapper().readValue(new File(configJson), Map.class);
-            Map data = (Map) readValue.get("data");
-            String directory = (String) data.get("directory");
-            files = FileUtils.allFilesByType(directory, "xml");
+            Map cfg = config.getJson();
+            Map data = (Map) cfg.get("data");
+            clientURL = (String) cfg.get("endpoint");
+            String directory = (String) cfg.get("directory");
+            xsltFilePath = (String) cfg.get("xslt-path");
+            xpathExpression = (String) cfg.get("xpath-expression");
             profiles = (List<Map<String, String>>) data.get("profiles");
-            LOG.info("D!" + data.get("name"));
+            files = SaxonUtils.filesMatchingXpath(directory, new String[] {xpathExpression});
+            //   FileUtils.allFilesByType(directory, "xml");
+            LOG.info("D!" + cfg.get("name") + xpathExpression + " files#" + files.length);
         } catch (Exception e) {
             LOG.warn(e.getMessage(), e);
         }
@@ -58,22 +67,26 @@ public class Publisher extends Task {
         return this;
     }
 
+    @Scheduled(initialDelay = 3000, fixedDelay = 300000L)
     public void run() throws Exception {
+        List<Future<ResponseEntity<String>>> futures = new ArrayList<>();
+        ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) taskExecutor;
+
         for (String filePath : files) {
-        for(Map<String, String> map : profiles) {
-            LOG.info("Profile: " + map.get("profile"));
-            LOG.info("Endpoint: " + map.get("endpoint"));
-            final Map<String, String> queryMap = queryMap(map.get("endpoint"), map.get("profile"));
-            SOAPClient client = new SOAPClient(clientURL) {
-                public ResponseEntity<String> post(String filePath) throws Exception {
-                    return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getFile(),
-                            new File(filePath));
-                }
-            };
-               addTask(client, filePath);
+            for(Map<String, String> map : profiles) {
+                //final Map<String, String> queryMap = queryMap(map.get("endpoint"), map.get("profile"));
+                CallablePublisher publisher = new CallablePublisher(map, clientURL, filePath, xsltFilePath);
+                Future<ResponseEntity<String>> future = executor.submit(publisher);
+                futures.add(future);
             }
         }
-        waitForThreadPool(((ThreadPoolTaskExecutor) taskExecutor));
+        if (!config.isEnableScheduler()) waitForThreadPool(executor);
+
+        for(Future<ResponseEntity<String>> future : futures) {
+            ResponseEntity<String> response = future.get();
+            if (response != null)
+                LOG.info("Serialized result: " + response.toString());
+        }
     }
 
     private Map<String, String> queryMap(String url, String agency) {
@@ -83,29 +96,11 @@ public class Publisher extends Task {
         ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
     }
 
-    private void addTask(final SOAPClient client, String filePath){
-        taskExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                ResponseEntity<String> response = null;
-                LOG.info("File- " + filePath);
-                try {
-                    response = client.post(filePath);
-                } catch (Exception e) {
-                    LOG.warn("Continue on Error! ...." , e);
-                }
-                if (response != null)
-                    LOG.info("Serialized result: " + response.toString());
-            }
-        });
-    }
-
-    protected void waitForThreadPool(final ThreadPoolTaskExecutor threadPoolExecutor)
-    {
-        threadPoolExecutor.setWaitForTasksToCompleteOnShutdown(true);
-        threadPoolExecutor.shutdown();
+    private void waitForThreadPool(ThreadPoolTaskExecutor taskExecutor) {
+        taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
+        taskExecutor.shutdown();
         try {
-            threadPoolExecutor.getThreadPoolExecutor().awaitTermination(180, TimeUnit.SECONDS);
+            taskExecutor.getThreadPoolExecutor().awaitTermination(180, TimeUnit.SECONDS);
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

@@ -62,7 +62,7 @@ public class PublishEvent extends Task {
         final Map<String, String> queryMap = queryMap(endPoint, profile);
         SOAPClient client = new SOAPClient(clientURL) {
             public ResponseEntity<String> post(String filePath) throws Exception {
-                return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getFile(),
+                return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getInputStream(),
                         new File(filePath));
             }
         };

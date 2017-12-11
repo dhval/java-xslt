@@ -1,5 +1,6 @@
 package com.dhval;
 
+import com.dhval.config.ConditionalThreadPoolTaskScheduler;
 import com.dhval.task.FlattenWSDL;
 import com.dhval.task.Task;
 import com.dhval.utils.FileUtils;
@@ -17,30 +18,40 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
+@EnableScheduling
 public class Application implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private ApplicationContext context;
 
-    @Value("${data.config:}")
+    @Value("${data.config:config/config.json}")
     String configJson;
 
     @Bean
     public TaskExecutor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(100);
-        executor.setMaxPoolSize(100);
-        executor.setQueueCapacity(1000);
-        return executor;
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setCorePoolSize(25);
+        taskExecutor.setMaxPoolSize(25);
+        taskExecutor.setQueueCapacity(10000);
+        return taskExecutor;
+    }
+
+    @Bean
+    public TaskScheduler taskScheduler() {
+        return new ConditionalThreadPoolTaskScheduler();
     }
 
     public static void main(String[] args) {

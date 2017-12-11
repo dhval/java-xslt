@@ -27,7 +27,7 @@ public class QLems extends SOAPClient {
     }
 
     public ResponseEntity<String> post(Map<String, String> queryMap) throws Exception {
-        return transform(queryMap, new ClassPathResource("xsl/lems.xsl").getFile(), null);
+        return transform(queryMap, new ClassPathResource("xsl/lems.xsl").getInputStream(), null);
     }
 
 }

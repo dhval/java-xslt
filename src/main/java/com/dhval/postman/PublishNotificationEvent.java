@@ -32,7 +32,7 @@ public class PublishNotificationEvent extends SOAPClient {
     }
 
     public ResponseEntity<String> post(String filePath) throws Exception {
-        return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getFile(),
+        return transform(queryMap, new ClassPathResource("xsl/notify.xsl").getInputStream(),
                 new File(filePath));
     }
 
