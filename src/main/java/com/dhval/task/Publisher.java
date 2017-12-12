@@ -41,6 +41,7 @@ public class Publisher extends Task {
     private String clientURL;
     private String xsltFilePath;
     private String xpathExpression;
+    private int counter = 0;
     private List<Map<String, String>> profiles;
     private String[] files;
 
@@ -78,6 +79,7 @@ public class Publisher extends Task {
                 CallablePublisher publisher = new CallablePublisher(map, clientURL, filePath, xsltFilePath);
                 Future<ResponseEntity<String>> future = executor.submit(publisher);
                 futures.add(future);
+                counter++;
             }
         }
         if (!config.isEnableScheduler()) waitForThreadPool(executor);
@@ -99,6 +101,7 @@ public class Publisher extends Task {
     private void waitForThreadPool(ThreadPoolTaskExecutor taskExecutor) {
         taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
         taskExecutor.shutdown();
+
         try {
             taskExecutor.getThreadPoolExecutor().awaitTermination(180, TimeUnit.SECONDS);
         } catch (IllegalStateException e) {
@@ -110,8 +113,11 @@ public class Publisher extends Task {
 
     @PreDestroy
     private void destroy() {
-        if (files !=null) LOG.info("Files processed: " + files.length);
-        if (profiles !=null) LOG.info("Profiles# " + profiles.size());
+        if (files !=null && profiles !=null) {
+            LOG.info("Total# " + counter);
+            LOG.info("Files processed: " + files.length);
+            LOG.info("Profiles# " + profiles.size());
+        }
     }
 
 }
