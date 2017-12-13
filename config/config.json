@@ -4,10 +4,14 @@
   "enable-scheduler": "yes",
   "directory": "/Users/dhval/projects/github/xsl-tool/tmp",
   "xslt-path": "xsl/notify.xsl",
-  "xpath-expression": [
+  "_xpath-expression": [
     "//*[local-name()='EventName' and (text()='Reception' or text()='Transfer' or text()='ProjctdRel')]",
     "//*[local-name()='ActivityCategoryText']='County Inmate Maintenance Message'",
     "//*[local-name()='DocumentSubjectText']='ERInmate'"
+  ],
+  "xpath-expression": [
+    "//*[local-name()='EventName' and (text()='Reception' or text()='Transfer' or text()='ProjctdRel' or text()='Bed_Move')]",
+    "//*[local-name()='EventName' and (text()='NmChngDOC'  or text()='AccountBal'  or text()='Continue'  or text()='Release'  or text()='Death_DOC'  or text()='Escape' )]"
   ],
   "data": {
     "profiles": [

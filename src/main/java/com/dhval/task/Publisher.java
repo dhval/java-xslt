@@ -67,7 +67,7 @@ public class Publisher extends Task {
         return this;
     }
 
-    @Scheduled(initialDelay = 3000, fixedDelay = 300000L)
+    @Scheduled(initialDelay = 3000, fixedDelay = 15000L)
     public void run() throws Exception {
         List<Future<ResponseEntity<String>>> futures = new ArrayList<>();
         ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) taskExecutor;
@@ -110,7 +110,9 @@ public class Publisher extends Task {
 
     @PreDestroy
     private void destroy() {
-        if (files !=null) LOG.info("Files processed: " + files.length);
+        if (files !=null) {
+            LOG.info("Files processed: " + files.length);
+        }
         if (profiles !=null) LOG.info("Profiles# " + profiles.size());
     }
 

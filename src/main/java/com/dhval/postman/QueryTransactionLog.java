@@ -43,6 +43,8 @@ public class QueryTransactionLog {
     @Value("${client.ws.url}")
     private String clientURL;
 
+    private String directory = "tmp/";
+
     public List<String> queryForAvailableData() throws IOException, SaxonApiException {
         RestTemplate restTemplate =  new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -72,7 +74,7 @@ public class QueryTransactionLog {
 
             String fileType = getFileName(transactionId, response.getBody().toString()).replaceAll(" ", "_");
 
-            FileUtils.overWriteToDisk("tmp/" + fileType + "-data.xml", response.getBody().toString());
+            FileUtils.overWriteToDisk(directory + fileType + "-data.xml", response.getBody().toString());
             System.out.print(response.toString());
         }
     }
@@ -106,11 +108,23 @@ public class QueryTransactionLog {
             fileType += "-" + ((XdmNode) xpSelect.iterator().next()).getStringValue();
             return fileType;
         }
-        xpSelect = SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='IdentificationID']");
+        xpSelect = SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='EventName']");
         if (xpSelect.iterator().hasNext()) {
+            fileType += "-" + ((XdmNode) xpSelect.iterator().next()).getStringValue();
+        }
+        xpSelect = SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='IdentificationID']");
+        while (xpSelect.iterator().hasNext()) {
             fileType += "-" + ((XdmNode) xpSelect.iterator().next()).getStringValue();
             return fileType;
         }
-       return fileType + "-" + id;
+        return fileType + "-" + id;
+    }
+
+    public String getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
     }
 }
