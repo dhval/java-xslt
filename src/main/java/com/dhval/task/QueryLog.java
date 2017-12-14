@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service("QueryLog")
@@ -24,5 +25,9 @@ public class QueryLog extends Task {
         List<String> values = query.queryForAvailableData();
         LOG.info(values.toString());
         query.saveFilesToDisk(values);
+        // query.saveFilesToDisk(Arrays.asList(files));
     }
+
+    static  final String[] files =  {
+    };
 }
