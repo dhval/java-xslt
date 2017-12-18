@@ -19,9 +19,9 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
 public class StateOffenderEventTest {
-    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StateOffenderEventTest.class);
 
-    private static String directory = "tmp/tmp-doc";
+    private static String directory = "doc-state-offender-event/";
     private static String[] xpathExpression = {
             "//*[local-name()='OffenderEvent']/*[local-name()='EventProperties']/*[local-name()='EventName']='Transfer'"
             , "//*[local-name()='OffenderEvent']/*[local-name()='EventProperties']/*[local-name()='EventName']='ProjctdRel'"
@@ -33,6 +33,11 @@ public class StateOffenderEventTest {
     @Test
     public void run() throws Exception {
         String[] files = SaxonUtils.filesMatchingXpath(directory, xpathExpression);
+        /**
+        String[] files = {
+                "/Users/dhval/projects/github/xsl-tool/doc-state-offender-event/S-ProjctdRel-523625021-data.xml"
+        };
+         **/
         for(String file: files) {
             LOG.info(file);
             ResponseEntity<String> response = null;

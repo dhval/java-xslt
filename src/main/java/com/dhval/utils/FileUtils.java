@@ -8,9 +8,13 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileUtils {
 
@@ -106,6 +110,19 @@ public class FileUtils {
                 br.close();
             }
             return null;
+    }
+
+    public static List<String> readFileByLine(String path) {
+        List<String> list = new ArrayList<>();
+        try (Stream<String> stream = Files.lines(Paths.get(path))) {
+            list = stream
+                    .filter(line -> !line.isEmpty())
+                    .map(String::toUpperCase)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            LOG.info(e.getMessage(), e);
+        }
+        return list;
     }
 
     public static void createDirectory(String path) {
