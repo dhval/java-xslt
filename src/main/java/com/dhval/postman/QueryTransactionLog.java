@@ -37,7 +37,7 @@ public class QueryTransactionLog {
                     + " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"> "
                     + "    <soapenv:Body> "
                     + "       <RecordId>DPResponseRouter</RecordId>"
-                    + "       <QueryType>dhs-medicalassistance-test_forward-ssl-proxy</QueryType> "
+           //         + "       <QueryType>dhs-medicalassistance-test_forward-ssl-proxy</QueryType> "
                     + "    </soapenv:Body> "
                     + " </soapenv:Envelope> ";
 

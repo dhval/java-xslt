@@ -4,11 +4,10 @@ import com.dhval.utils.SaxonUtils;
 import net.sf.saxon.s9api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.io.FileNotFoundException;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class XMLTree {
     private static final Logger LOG = LoggerFactory.getLogger(XMLTree.class);
@@ -25,35 +24,60 @@ public class XMLTree {
         return node;
     }
 
-    private static void build(XdmNode src, XMLNode target) {
-        target.name = src.getNodeName().toString();
-        XdmSequenceIterator iterator = src.axisIterator(Axis.CHILD);
-        while (iterator.hasNext()) {
-            XdmItem item = iterator.next();
-            XdmNode srcNode = (XdmNode) item;
-            //ignore non element nodes
-            if (srcNode.getNodeKind().compareTo(XdmNodeKind.ELEMENT) != 0) continue;
-            XMLNode targetNode = new XMLNode();
-            targetNode.path = target.path + "/" + target.name;
-            target.getChildren().add(targetNode);
-            build(srcNode, targetNode);
+    private static void build(XdmNode srcRoot, XMLNode targetRoot) {
+        Map<String, String> xPathMap = new HashMap<>();
+        List<Map.Entry<XMLNode, XdmNode>> list = new ArrayList<>();
+        list.add(new AbstractMap.SimpleEntry<XMLNode, XdmNode>(targetRoot, srcRoot));
+        while (!list.isEmpty()) {
+            Map.Entry<XMLNode, XdmNode> entry = list.remove(0);
+            XMLNode targetNode = entry.getKey();
+            XdmNode srcNode = entry.getValue();
+            targetNode.name = srcNode.getNodeName().toString();
+            XdmSequenceIterator iterator = srcNode.axisIterator(Axis.CHILD);
+            while (iterator.hasNext()) {
+                XdmItem item = iterator.next();
+                XdmNode childNode = (XdmNode) item;
+                //ignore non element nodes
+                if (childNode.getNodeKind().compareTo(XdmNodeKind.ELEMENT) != 0) continue;
+                XMLNode copyToNode = new XMLNode();
+                copyToNode.path = getXpath(xPathMap, targetNode.path + "/" + childNode.getNodeName().toString());
+                targetNode.getChildren().add(copyToNode);
+                list.add(new AbstractMap.SimpleEntry<XMLNode, XdmNode>(copyToNode, childNode));
+            }
         }
     }
 
-    public static List<String> getLeaves(XMLNode root, List<String> target) {
-        if(root.getChildren().isEmpty()) {
-            target.add(root.path + "/" + root.name);
+    private static String getXpath(Map<String, String> map, String key) {
+        if (StringUtils.isEmpty(key))
+            return "";
+        int counter = 1;
+        String uniqueKey = key + "[" + counter + "]";
+        while(map.containsKey(uniqueKey)) {
+            uniqueKey = key + "[" + ++counter + "]";
         }
-        for(XMLNode node: root.getChildren()){
-            getLeaves(node, target);
-        }
-        return target;
+        map.put(uniqueKey, key);
+        return uniqueKey;
     }
 
-    public static List<String> compare(XMLNode src, XMLNode target) {
-        List<String> srcList =  getLeaves(src, new LinkedList<>());;
-        List<String> targetList = getLeaves(target, new LinkedList<>());
-        List<String> result = new LinkedList<>(srcList);
+    public static List<XMLNode> getLeafNodes(XMLNode root) {
+        List<XMLNode> result = new ArrayList<>();
+        List<XMLNode> list = new ArrayList<>();
+        list.addAll(root.getChildren());
+        while (!list.isEmpty()) {
+            XMLNode node = list.remove(0);
+            if (node.getChildren().isEmpty()) {
+                result.add(node);
+            } else {
+                list.addAll(node.getChildren());
+            }
+        }
+        return result;
+    }
+
+    public static List<XMLNode> compare(XMLNode src, XMLNode target) {
+        List<XMLNode> srcList =  getLeafNodes(src);
+        List<XMLNode> targetList = getLeafNodes(target);
+        List<XMLNode> result = new LinkedList<>(srcList);
         result.removeAll(targetList);
         return result;
     }
