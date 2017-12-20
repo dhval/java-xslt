@@ -25,7 +25,7 @@ public class QueryTransactionLogTest {
     @Autowired
     QueryTransactionLog query;
 
-    @Test
+    //@Test
     public void queryForAvailableData() throws Exception {
        query.setDirectory("dhs-state-offender-event/");
        List<String> values = query.queryForAvailableData();
@@ -33,7 +33,7 @@ public class QueryTransactionLogTest {
        query.saveFilesToDisk(values);
     }
 
-    //@Test
+    @Test
     public void queryById() throws Exception {
        List<String> files = FileUtils.readFileByLine("/Users/dhval/Desktop/export.txt");
        query.setDirectory("dhs-state-offender-event/");

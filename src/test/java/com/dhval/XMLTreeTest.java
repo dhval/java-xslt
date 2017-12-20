@@ -16,17 +16,17 @@ import java.util.List;
 public class XMLTreeTest {
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
-    String src = "/Users/dhval/projects/github/xsl-tool/doc-state-offender-event/S-ProjctdRel-156684864-data.xml";
-    String target = "/Users/dhval/projects/github/xsl-tool/dhs-state-offender-event/StateOffenderEvent-ProjctdRel-11e0-432a-3fc4-56d0-1607-fff85ce-data.xml";
+    String src = "/Users/dhval/Desktop/file2.xml";
+    String target = "/Users/dhval/Desktop/file1.xml";
     String parentXPath = "//*[local-name()='OffenderEvent']";
 
     @Test
     public void compare() throws Exception {
         XMLNode srcNode = XMLTree.build(src, parentXPath);
         XMLNode targetNode = XMLTree.build(target, parentXPath);
-        List<String> result = XMLTree.compare(srcNode, targetNode);
-        for(String s : result) {
-            LOG.info(s);
+        List<XMLNode> result = XMLTree.compare(srcNode, targetNode);
+        for(XMLNode s : result) {
+            LOG.info(s.path);
         }
         LOG.info("Size#" + result.size());
     }

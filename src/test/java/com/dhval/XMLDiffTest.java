@@ -19,8 +19,10 @@ import org.xmlunit.diff.*;
 
 import java.io.FileWriter;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
@@ -56,6 +58,16 @@ public class XMLDiffTest {
         differ.structureCompare();
     }
 
+    //@Test
+    public void getLeaves() throws Exception {
+        XMLNode srcNode = XMLTree.build(src, parentXPath);
+        List<XMLNode> result = XMLTree.getLeafNodes(srcNode);
+        for(XMLNode node: result) {
+            LOG.info(node.path);
+        }
+        LOG.info("#" + result.size());
+    }
+
     public void run() throws Exception {
        com.dhval.utils.XMLDiff xmlDiff = com.dhval.utils.XMLDiff.XMLDiffBuilder(src, target, parentXPath);
        Long diffCount = xmlDiff.possibleDifferenceCount();
@@ -87,11 +99,13 @@ public class XMLDiffTest {
 
         for(int i=0; i<maxCounter && i<files.length; i++ ) {
             String createdTime = SaxonUtils.getXPathSelector(files[i], "//*[local-name()='Created']/text()").evaluate().getUnderlyingValue().getStringValue();
+            /**
             if (!createdTime.contains("2017-12-18")) {
                 maxCounter++;
                 LOG.info("Skip-" + createdTime);
                 continue;
             }
+             **/
             XPathSelector selector = SaxonUtils.getXPathSelector(files[i], xPath);
             XdmValue xdmValue = selector.evaluate();
             String inmateId = xdmValue.getUnderlyingValue().getStringValue();
@@ -102,12 +116,12 @@ public class XMLDiffTest {
             LOG.info("------------------------------------");
             XMLNode srcNode = XMLTree.build(matches[0], parentXPath);
             XMLNode targetNode = XMLTree.build(files[i], parentXPath);
-            List<String> result = XMLTree.compare(srcNode, targetNode);
+            List<XMLNode> result = XMLTree.compare(srcNode, targetNode);
 
 
             //XMLPerfectSourceDiff differ = new XMLPerfectSourceDiff(matches[0], files[i], parentXPath);
             //stringSet.addAll(differ.structureCompare());
-            stringSet.addAll(result);
+            stringSet.addAll(result.stream().map(node -> node.path).collect(Collectors.toList()));
 
             LOG.info("src --- " +  matches[0]);
             LOG.info("------------------------------------");
@@ -115,12 +129,12 @@ public class XMLDiffTest {
 
             LOG.info("------------------------------------");
             LOG.info("------------------------------------");
-            LOG.info("----" + stringSet.size() + "---------");
+            LOG.info("----" + result.size() + "---------");
             LOG.info("------------------------------------");
             LOG.info("------------------------------------");
 
-            for(String m: stringSet)
-                LOG.info(m);
+            for(XMLNode m: result)
+                LOG.info(m.path);
 
         }
 
