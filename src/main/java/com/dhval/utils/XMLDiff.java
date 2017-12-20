@@ -70,7 +70,7 @@ public class XMLDiff {
         for (Difference diff: diff.getDifferences()) {
             ComparisonResult result = diff.getResult();
             Comparison comparison = diff.getComparison();
-          if (!selectType().contains(comparison.getType())) continue;
+ //         if (!selectType().contains(comparison.getType())) continue;
             if (ComparisonType.TEXT_VALUE.equals(comparison.getType()))
                 printTextCompare(comparison);
             else
@@ -88,7 +88,7 @@ public class XMLDiff {
 
     private void printChildNodeList(Comparison comparison) {
         Object val = comparison.getControlDetails().getValue();
-        if (val == null || val.toString().equals("#text")) return;
+ //       if (val == null || val.toString().equals("#text")) return;
         LOG.info("----" + comparison.getType() + "---" + comparison.getControlDetails().getValue() + "---");
         LOG.info("src: " + comparison.getControlDetails().getParentXPath());
         LOG.info("src: " + comparison.getControlDetails().getXPath());

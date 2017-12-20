@@ -21,6 +21,7 @@ import java.io.FileWriter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Application.class})
@@ -102,12 +103,12 @@ public class XMLDiffTest {
             LOG.info("------------------------------------");
             XMLNode srcNode = XMLTree.build(matches[0], parentXPath);
             XMLNode targetNode = XMLTree.build(files[i], parentXPath);
-            List<String> result = XMLTree.compare(srcNode, targetNode);
+            List<XMLNode> result = XMLTree.compare(srcNode, targetNode);
 
 
             //XMLPerfectSourceDiff differ = new XMLPerfectSourceDiff(matches[0], files[i], parentXPath);
             //stringSet.addAll(differ.structureCompare());
-            stringSet.addAll(result);
+            stringSet.addAll(result.stream().map(node -> node.path).collect(Collectors.toList()));
 
             LOG.info("src --- " +  matches[0]);
             LOG.info("------------------------------------");

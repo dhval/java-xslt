@@ -24,9 +24,9 @@ public class XMLTreeTest {
     public void compare() throws Exception {
         XMLNode srcNode = XMLTree.build(src, parentXPath);
         XMLNode targetNode = XMLTree.build(target, parentXPath);
-        List<String> result = XMLTree.compare(srcNode, targetNode);
-        for(String s : result) {
-            LOG.info(s);
+        List<XMLNode> result = XMLTree.compare(srcNode, targetNode);
+        for(XMLNode s : result) {
+            LOG.info(s.path);
         }
         LOG.info("Size#" + result.size());
     }

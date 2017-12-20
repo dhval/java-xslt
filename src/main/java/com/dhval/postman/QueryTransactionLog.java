@@ -6,10 +6,7 @@ import com.dhval.utils.FileUtils;
 import com.dhval.utils.SaxonUtils;
 import net.sf.saxon.s9api.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +14,9 @@ import javax.xml.bind.JAXBElement;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class QueryTransactionLog {
@@ -44,16 +43,18 @@ public class QueryTransactionLog {
     @Value("${client.ws.url}")
     private String clientURL;
 
-    private String directory = "tmp/";
-
-    public List<String> queryForAvailableData() throws IOException, SaxonApiException {
+    public List<String> queryForAvailableData(Map<String, String> queryMap) throws IOException, SaxonApiException {
         RestTemplate restTemplate =  new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_XML);
-        headers.add("header_name", "header_value");
-        HttpEntity<String> request = new HttpEntity<String>(QUERY_FOR_TOP_100_ROWS, headers);
+        if (queryMap != null) {
+            for(Map.Entry<String, String> entry : queryMap.entrySet()) {
+                headers.add(entry.getKey(), entry.getValue());
+            }
+        }
+        HttpEntity<String> httpEntity = new HttpEntity<String>(QUERY_FOR_TOP_100_ROWS, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(clientURL, QUERY_FOR_TOP_100_ROWS, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(clientURL, HttpMethod.POST, httpEntity, String.class);
         XPathSelector xPathSelector =  SaxonUtils.getXPathSelectorFromString(response.getBody().toString(),
                 "//row/column[1]/value[1]");
 
@@ -67,7 +68,7 @@ public class QueryTransactionLog {
         return values;
     }
 
-    public void saveFilesToDisk(List<String> transactionIds) throws IOException, SaxonApiException {
+    public void saveFilesToDisk(List<String> transactionIds, String directory) throws IOException, SaxonApiException {
         RestTemplate restTemplate =  new RestTemplate();
         for (String transactionId : transactionIds) {
             String query = QUERY_FOR_TOP_DATA.replace("DPResponseRouter", transactionId);
@@ -113,19 +114,18 @@ public class QueryTransactionLog {
         if (xpSelect.iterator().hasNext()) {
             fileType += "-" + ((XdmNode) xpSelect.iterator().next()).getStringValue();
         }
-        xpSelect = SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='IdentificationID']");
-        while (xpSelect.iterator().hasNext()) {
-            fileType += "-" + ((XdmNode) xpSelect.iterator().next()).getStringValue();
+        xpSelect = SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='InmateNumberID']");
+        Iterator<XdmItem> itr = xpSelect.iterator();
+        if (itr.hasNext()) {
+            fileType += "-" + ((XdmNode) itr.next()).getStringValue();
+        }
+        xpSelect = SaxonUtils.getXPathSelectorFromString(rsp, "//*[local-name()='DateTime']");
+        itr = xpSelect.iterator();
+        if (itr.hasNext()) {
+            fileType += "-" + ((XdmNode) itr.next()).getStringValue();
             return fileType;
         }
         return fileType + "-" + id;
     }
 
-    public String getDirectory() {
-        return directory;
-    }
-
-    public void setDirectory(String directory) {
-        this.directory = directory;
-    }
 }
