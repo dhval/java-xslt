@@ -91,13 +91,6 @@ public class Publisher extends Task {
         }
     }
 
-    private Map<String, String> queryMap(String url, String agency) {
-        return Stream.of(
-                new AbstractMap.SimpleEntry<>("Agency", agency),
-                new AbstractMap.SimpleEntry<>("Target", url)
-        ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
-    }
-
     private void waitForThreadPool(ThreadPoolTaskExecutor taskExecutor) {
         taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
         taskExecutor.shutdown();
