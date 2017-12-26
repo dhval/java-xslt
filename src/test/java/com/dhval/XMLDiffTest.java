@@ -98,8 +98,8 @@ public class XMLDiffTest {
          int maxCounter = 1500;
 
         for(int i=0; i<maxCounter && i<files.length; i++ ) {
-            String createdTime = SaxonUtils.getXPathSelector(files[i], "//*[local-name()='Created']/text()").evaluate().getUnderlyingValue().getStringValue();
             /**
+            String createdTime = SaxonUtils.getXPathSelector(files[i], "//*[local-name()='Created']/text()").evaluate().getUnderlyingValue().getStringValue();
             if (!createdTime.contains("2017-12-18")) {
                 maxCounter++;
                 LOG.info("Skip-" + createdTime);

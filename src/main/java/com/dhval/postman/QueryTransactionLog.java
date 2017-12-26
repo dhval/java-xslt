@@ -77,7 +77,6 @@ public class QueryTransactionLog {
             String fileType = getFileName(transactionId, response.getBody().toString()).replaceAll(" ", "_");
 
             FileUtils.overWriteToDisk(directory + fileType + "-data.xml", response.getBody().toString());
-            System.out.print(response.toString());
         }
     }
 
